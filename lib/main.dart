@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'SignIn.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 
@@ -89,7 +90,13 @@ class WelcomePage extends StatelessWidget {
                               child: FloatingActionButton(
                                 heroTag: "btn1",
                                 backgroundColor: color,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignInPage()));
+                                },
                                 // child: ImageIcon(
                                 //   AssetImage("images/image1.png"),
                                 // ),
@@ -105,9 +112,6 @@ class WelcomePage extends StatelessWidget {
                                 heroTag: "btn2",
                                 backgroundColor: color,
                                 onPressed: () {},
-                                // child: ImageIcon(
-                                //   AssetImage("images/image1.png"),
-                                // ),
                                 child: const Icon(Icons.face, size: 40),
                               ),
                             ),
