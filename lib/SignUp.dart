@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'SignUp.dart';
+import 'SignIn.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
   _State createState() => _State();
 }
 
-class _State extends State<SignInPage> {
+class _State extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,7 +51,7 @@ class _State extends State<SignInPage> {
                             )),
                         //sign up container
                         Container(
-                            margin: const EdgeInsets.only(top: 160),
+                            margin: const EdgeInsets.only(top: 70),
                             decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -81,12 +81,11 @@ class _State extends State<SignInPage> {
                                       margin: const EdgeInsets.only(
                                         top: 50,
                                       ),
-                                      child: const Text('Sign In',
+                                      child: const Text('Sign Up',
                                           style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 247, 149, 30),
+                                            color: color,
                                           )),
                                     ),
                                     Container(
@@ -133,6 +132,33 @@ class _State extends State<SignInPage> {
                                         margin: const EdgeInsets.all(14),
                                         child: const TextField(
                                           decoration: InputDecoration(
+                                              labelText: 'Email ID',
+                                              border: InputBorder.none,
+                                              labelStyle: TextStyle(
+                                                color: Color.fromARGB(
+                                                    127, 117, 117, 117),
+                                                fontSize: 14,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 45,
+                                      width: 350,
+                                      margin: const EdgeInsets.only(
+                                        top: 15,
+                                      ),
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
+                                        ),
+                                        color:
+                                            Color.fromARGB(127, 227, 227, 227),
+                                      ),
+                                      child: Container(
+                                        margin: const EdgeInsets.all(14),
+                                        child: const TextField(
+                                          decoration: InputDecoration(
                                               labelText: 'Password',
                                               border: InputBorder.none,
                                               labelStyle: TextStyle(
@@ -143,6 +169,32 @@ class _State extends State<SignInPage> {
                                         ),
                                       ),
                                     ),
+                                    Container(
+                                        height: 45,
+                                        width: 350,
+                                        margin: const EdgeInsets.only(
+                                          top: 15,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(15),
+                                          ),
+                                          color: Color.fromARGB(
+                                              127, 227, 227, 227),
+                                        ),
+                                        child: Container(
+                                          margin: const EdgeInsets.all(14),
+                                          child: const TextField(
+                                            decoration: InputDecoration(
+                                                labelText: 'Confirm Password',
+                                                border: InputBorder.none,
+                                                labelStyle: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      127, 117, 117, 117),
+                                                  fontSize: 14,
+                                                )),
+                                          ),
+                                        )),
                                     Container(
                                         height: 59,
                                         width: 350,
@@ -169,7 +221,7 @@ class _State extends State<SignInPage> {
                                               //             const WelcomePage()));
                                             },
                                             child: const Text(
-                                              'Sign In',
+                                              'Sign Up',
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
@@ -185,7 +237,7 @@ class _State extends State<SignInPage> {
                                         children: [
                                           Container(
                                             child: const Text(
-                                              'Don\'t have an account?',
+                                              'Already have an account?',
                                             ),
                                           ),
                                           Container(
@@ -195,11 +247,11 @@ class _State extends State<SignInPage> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          const SignUpPage(),
+                                                          const SignInPage(),
                                                     ));
                                               },
                                               child: const Text(
-                                                'Sign Up here',
+                                                'Sign in',
                                               ),
                                             ),
                                           )
