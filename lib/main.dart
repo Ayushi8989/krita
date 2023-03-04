@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'SignIn.dart';
 
+import 'ngo/ngo_signin.dart';
+
 const color = Color.fromARGB(230, 247, 149, 30);
 
 void main() => runApp(const MyApp());
@@ -111,7 +113,13 @@ class WelcomePage extends StatelessWidget {
                               child: FloatingActionButton(
                                 heroTag: "btn2",
                                 backgroundColor: color,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Ngo_SignInPage()));
+                                },
                                 child: const Icon(Icons.face, size: 40),
                               ),
                             ),
