@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:krita/ngo/formInput_Card.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 
@@ -67,6 +68,73 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                 ]
               ),
 
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text('Sign In',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                        color: color,
+                      ),
+                    ),
+
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InputCard(
+                      child: Container(
+                                        margin: const EdgeInsets.all(14),
+                                        child: const TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'User Name',
+                                              border: InputBorder.none,
+                                              labelStyle: TextStyle(
+                                                color: Color.fromARGB(
+                                                    127, 117, 117, 117),
+                                                fontSize: 14,
+                                              )),
+                                        ),
+                                      ),
+                    ),
+
+                    InputCard(
+                      child: Container(
+                                        margin: const EdgeInsets.all(14),
+                                        child: const TextField(
+                                          decoration: InputDecoration(
+                                              labelText: 'Password',
+                                              border: InputBorder.none,
+                                              labelStyle: TextStyle(
+                                                color: Color.fromARGB(
+                                                    127, 117, 117, 117),
+                                                fontSize: 14,
+                                              )),
+                                        ),
+                                      ),
+                      )
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 59,
+                      width: 350,
+                      child: FloatingActionButton.extended(
+                        onPressed: () {}, 
+                        label: const Text('Sign In',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor: color,
+                      ),
+                    ),
+                    
+                  ],
+                ),
+              ),
             ),
             )
             
