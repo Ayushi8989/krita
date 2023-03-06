@@ -24,10 +24,9 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          icon: const Icon(Icons.arrow_back_sharp),
           color: color,
           iconSize: 30,
-          //replace with our own icon data.
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -41,7 +40,11 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
               child: const Text(
                 'Krita',
                 style:
-                    TextStyle(fontFamily: 'SAMAN', color: color, fontSize: 105),
+                    TextStyle(
+                      fontFamily: 'SAMAN', 
+                      color: color, 
+                      fontSize: 105
+                    ),
               ),
             ),
 
@@ -83,8 +86,6 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InputCard(
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                       hintText: 'User Name',
@@ -95,11 +96,8 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                                       ),
                                     ),
                                 ),
-                              ),
                             ),
                             InputCard(
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                       hintText: 'Password',
@@ -107,9 +105,9 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                                       hintStyle: TextStyle(
                                         color: Color.fromARGB(127, 117, 117, 117),
                                         fontSize: 14,
-                                      )),
+                                      ),
+                                  ),
                                 ),
-                              ),
                             ),
                           ],
                         ),
@@ -174,7 +172,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
