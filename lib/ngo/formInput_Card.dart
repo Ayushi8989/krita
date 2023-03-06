@@ -4,7 +4,7 @@ class InputCard extends StatefulWidget {
   // const InputCard({super.key});
   final Widget child;
 
-  InputCard({ key, required this.child}) : super(key: key);
+  InputCard({key, required this.child}) : super(key: key);
   // @override
   State<InputCard> createState() => _InputCardState();
 }
@@ -12,7 +12,6 @@ class InputCard extends StatefulWidget {
 class _InputCardState extends State<InputCard> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 45,
       width: MediaQuery.of(context).size.width * 0.7,

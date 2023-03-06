@@ -16,9 +16,8 @@ class Ngo_SignInPage extends StatefulWidget {
 class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -48,27 +47,27 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
               ),
             ),
 
-            //SignUp Container starts here
+            //SignIn Container starts here
             SizedBox(
-              height: MediaQuery.of(context).size.height- 279,
+              height: MediaQuery.of(context).size.height - 279,
               child: Container(
                 margin: const EdgeInsets.only(top: 100),
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(243, 243, 243, 243),
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(40.0),
-                        bottom: Radius.circular(0.0)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(34, 0, 0, 0),
-                        offset: Offset(10, -10),
-                        blurRadius: 15,
-                        spreadRadius: 6.0,
-                      )
-                    ],
+                  color: Color.fromARGB(243, 243, 243, 243),
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(40.0), 
+                      bottom: Radius.circular(0.0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(34, 0, 0, 0),
+                      offset: Offset(10, -10),
+                      blurRadius: 15,
+                      spreadRadius: 6.0,
+                    )
+                  ],
                 ),
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(30, 30, 30, 15),
+                  padding: const EdgeInsets.fromLTRB(30, 30, 30, 15),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -86,28 +85,28 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InputCard(
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      hintText: 'User Name',
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(
-                                        color: Color.fromARGB(127, 117, 117, 117),
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                ),
-                            ),
-                            InputCard(
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      hintText: 'Password',
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(
-                                        color: Color.fromARGB(127, 117, 117, 117),
-                                        fontSize: 14,
-                                      ),
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: 'User Name',
+                                  border: InputBorder.none,
+                                  hintStyle: TextStyle(
+                                    color: Color.fromARGB(127, 117, 117, 117),
+                                    fontSize: 14,
                                   ),
                                 ),
+                              ),
+                            ),
+                            InputCard(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: 'Password',
+                                  border: InputBorder.none,
+                                  hintStyle: TextStyle(
+                                    color: Color.fromARGB(127, 117, 117, 117),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -115,7 +114,6 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                       SizedBox(
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
-
                         child: FloatingActionButton.extended(
                           onPressed: () {},
                           label: const Text(
@@ -128,25 +126,20 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                           backgroundColor: color,
                         ),
                       ),
-
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),
                         child: Text(
-                        'or sign in with',
+                          'or sign in with',
                         ),
                       ),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Logo(Logos.facebook_logo),
-
                           Logo(Logos.google),
-
-                          Icon(FontAwesome.phone),
+                          const Icon(FontAwesome.phone),
                         ],
                       ),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
