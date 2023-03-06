@@ -12,9 +12,10 @@ class InputCard extends StatefulWidget {
 class _InputCardState extends State<InputCard> {
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: 45,
-      width: 350,
+      width: MediaQuery.of(context).size.width * 0.7,
       margin: const EdgeInsets.only(
         top: 20,
       ),
