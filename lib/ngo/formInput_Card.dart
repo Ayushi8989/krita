@@ -25,7 +25,10 @@ class _InputCardState extends State<InputCard> {
         ),
         color: Color.fromARGB(127, 227, 227, 227),
       ),
-      child: widget.child,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+        child: widget.child,
+      ),
     );
   }
 }
