@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'SignUp.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:krita/provider/sign_in_provider.dart';
+import 'package:provider/provider.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 
@@ -81,19 +84,62 @@ class _State extends State<SignInPage> {
                                       margin: const EdgeInsets.only(
                                         top: 50,
                                       ),
-                                      child: const Text('Sign In',
+                                      child: const Text('Welcome',
                                           style: TextStyle(
-                                            fontSize: 28,
-                                            fontWeight: FontWeight.w500,
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.w700,
                                             color: Color.fromARGB(
                                                 255, 247, 149, 30),
                                           )),
                                     ),
                                     Container(
+                                      margin: const EdgeInsets.only(
+                                          top: 25,
+                                          left: 60,
+                                          right: 60,
+                                          bottom: 15),
+                                      child: ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 226, 218, 199),
+                                            foregroundColor: Colors.black,
+                                            minimumSize: const Size(
+                                                double.infinity, 50)),
+                                        onPressed: () {
+                                          final provider =
+                                              Provider.of<GoogleSigninProvider>(
+                                                  context,
+                                                  listen: false);
+                                          provider.googleLogin();
+                                        },
+                                        // icon: Image.network(
+                                        //   'http://pngimg.com/uploads/google/google_PNG19635.png',
+                                        //   fit: BoxFit.cover,
+                                        //   height: 40,
+                                        //   width: 40,
+                                        // ),
+                                        icon: const FaIcon(
+                                          FontAwesomeIcons.google,
+                                        ),
+                                        label: const Text(
+                                          ' Sign in with Google',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const Text('or',
+                                        style: TextStyle(
+                                          color: color,
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                    Container(
                                       height: 45,
                                       width: 350,
                                       margin: const EdgeInsets.only(
-                                        top: 50,
+                                        top: 15,
                                       ),
                                       decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.all(

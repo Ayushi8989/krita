@@ -29,28 +29,25 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cloud_firestore: ^4.4.3
+  cupertino_icons: ^1.0.2
+  firebase_analytics: ^10.1.4
+  firebase_auth: ^4.2.9
+  firebase_core: ^2.7.0
+  firebase_core_platform_interface: ^4.4.1
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-
+  flutter_facebook_auth: ^5.0.8
+  font_awesome_flutter: ^10.4.0
+  google_sign_in: ^6.0.2
+  provider: ^6.0.5
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -63,25 +60,25 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-  - family: SAMAN
-    fonts:
-      - asset: assets\fonts\SAMAN___.TTF 
+    - family: SAMAN
+      fonts:
+        - asset: assets\fonts\SAMAN___.TTF
 
   assets:
-  - assets/images/
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    - assets/images/
+    # For details regarding fonts from package dependencies,
+    # see https://flutter.dev/custom-fonts/#from-packages
+
+#98:97:e5:a1:1c:4e:ae:84:17:41:ec:99:67:d8:ae:cf:65:10:57:1b
+
+# 0b:53:36:df:a7:33:23:90:c9:03:16:0a:a9:c8:07:77:4f:70:8d:09:60:44:cd:02:13:de:1b:1c:51:65:c4:39
