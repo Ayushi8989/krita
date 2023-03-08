@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'SignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'ngo/ngo_signin.dart';
+
 const color = Color.fromARGB(230, 247, 149, 30);
 
 void main() async {
@@ -119,7 +121,13 @@ class WelcomePage extends StatelessWidget {
                               child: FloatingActionButton(
                                 heroTag: "btn2",
                                 backgroundColor: color,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Ngo_SignInPage()));
+                                },
                                 child: const Icon(Icons.face, size: 40),
                               ),
                             ),

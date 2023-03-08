@@ -1,3 +1,4 @@
+
 name: krita
 description: A new Flutter project.
 
@@ -41,6 +42,8 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   google_sign_in: ^6.0.2
   provider: ^6.0.5
+  icons_plus: ^4.0.0
+
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
@@ -79,6 +82,5 @@ flutter:
     # For details regarding fonts from package dependencies,
     # see https://flutter.dev/custom-fonts/#from-packages
 
-#98:97:e5:a1:1c:4e:ae:84:17:41:ec:99:67:d8:ae:cf:65:10:57:1b
 
 # 0b:53:36:df:a7:33:23:90:c9:03:16:0a:a9:c8:07:77:4f:70:8d:09:60:44:cd:02:13:de:1b:1c:51:65:c4:39
