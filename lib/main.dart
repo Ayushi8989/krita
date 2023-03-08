@@ -3,14 +3,14 @@ import 'package:krita/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
 import 'SignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'dart:async';
 import 'ngo/ngo_signin.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,9 +28,44 @@ class MyApp extends StatelessWidget {
               secondary: Colors.yellow.shade700,
             ),
           ),
-          home: const WelcomePage(),
+          home: MyHomePage(),
         ),
       );
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const WelcomePage())));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+      child: const Center(
+        child: Text(
+          'Krita',
+          style: TextStyle(
+            fontFamily: 'SAMAN',
+            color: Colors.white,
+            fontSize: 105,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class WelcomePage extends StatelessWidget {
