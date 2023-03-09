@@ -105,9 +105,9 @@ class HomePage extends StatelessWidget {
                       )),
                       Container(
                           margin: const EdgeInsets.only(top: 14),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
+                            children: [
                               SizedBox(
                                 child: Text(
                                   'Donate',
