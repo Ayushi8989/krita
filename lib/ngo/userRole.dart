@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:krita/ngo/userRoleCard.dart';
 
 import 'ngo_signIn.dart';
 
@@ -13,9 +14,8 @@ class userRole extends StatefulWidget {
 }
 
 class _userRoleState extends State<userRole> {
+  int count = 0;
 
-  int count =0;
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _userRoleState extends State<userRole> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
@@ -64,18 +64,49 @@ class _userRoleState extends State<userRole> {
                   ),
                 ],
               ),
-              
+              GestureDetector(
+                onTap: () => setState(() {
+                  count = 1;
+                }),
+                child: userRole_Card(
+                  heading: 'Organisation Head',
+                  description: 'blah',
+                  isClicked: count == 1 ? true : false,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => setState(() {
+                  count = 2;
+                }),
+                child: userRole_Card(
+                  heading: 'Community Head',
+                  description:
+                      'A group of people who stepped forward to help the needy.',
+                  isClicked: count == 2 ? true : false,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => setState(() {
+                  count = 3;
+                }),
+                child: userRole_Card(
+                  heading: 'Volunteer',
+                  description:
+                      'Person who is willing to help the needy at any cost.',
+                  isClicked: count == 3 ? true : false,
+                ),
+              ),
               SizedBox(
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: FloatingActionButton.extended(
                   onPressed: () {
-                    if (count!=0)
-                     Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Ngo_SignInPage()));
+                    if (count != 0) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Ngo_SignInPage()));
+                    }
                   },
                   label: const Text(
                     'Next',
@@ -87,8 +118,7 @@ class _userRoleState extends State<userRole> {
                   backgroundColor: color,
                 ),
               ),
-            ]
-          ),
+            ]),
       ),
     );
   }

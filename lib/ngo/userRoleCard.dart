@@ -16,13 +16,13 @@ class _userRole_CardState extends State<userRole_Card> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 20.0),
-      color: widget.isClicked ? Color.fromARGB(230, 255, 216, 168) : Color.fromARGB(255, 240, 239, 239),
+      margin: const EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 20.0),
+      color: widget.isClicked ? const Color.fromARGB(230, 255, 216, 168) : const Color.fromARGB(255, 240, 239, 239),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         side: BorderSide(
-          color: widget.isClicked ? Color.fromARGB(230, 247, 149, 30) : Color.fromARGB(255, 240, 239, 239),
+          color: widget.isClicked ? const Color.fromARGB(230, 247, 149, 30) : const Color.fromARGB(255, 240, 239, 239),
           width: 2,
         ),
       ),
@@ -37,7 +37,7 @@ class _userRole_CardState extends State<userRole_Card> {
                   children: [
                     Text(
                       widget.heading,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 0, 0, 0),
@@ -46,7 +46,7 @@ class _userRole_CardState extends State<userRole_Card> {
                     // const SizedBox(height: 3.0,),
                     Text(
                       widget.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           color: Color.fromARGB(255, 49, 49, 49)),
