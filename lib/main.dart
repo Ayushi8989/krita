@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:krita/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
-import 'SignIn.dart';
+import 'donate/SignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
 import 'ngo/ngo_signin.dart';
@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             fontFamily: 'SAMAN',
             color: Colors.white,
             fontSize: 105,
+            decoration: TextDecoration.none,
           ),
         ),
       ),
