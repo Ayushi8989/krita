@@ -70,7 +70,7 @@ class _userRoleState extends State<userRole> {
                 }),
                 child: userRole_Card(
                   heading: 'Organisation Head',
-                  description: 'blah',
+                  description: 'An NGO which consists of more than 100 active members',
                   isClicked: count == 1 ? true : false,
                 ),
               ),
