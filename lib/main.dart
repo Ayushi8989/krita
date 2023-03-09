@@ -9,8 +9,8 @@ import 'ngo/ngo_signin.dart';
 const color = Color.fromARGB(230, 247, 149, 30);
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
