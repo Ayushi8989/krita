@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:krita/ngo/userRoleCard.dart';
+
+import 'ngo_signIn.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 const bg_color = Color.fromARGB(255, 255, 255, 255);
@@ -12,6 +13,9 @@ class userRole extends StatefulWidget {
 }
 
 class _userRoleState extends State<userRole> {
+
+  int count =0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,84 +64,21 @@ class _userRoleState extends State<userRole> {
                   ),
                 ],
               ),
-              userRole_Card(
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Organisation Head',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ),
-                    // const SizedBox(height: 3.0,),
-                    Text(
-                      'An NGO which consists of more than 100 people.',
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromARGB(255, 49, 49, 49)),
-                    )
-                  ],
-                ),
-              ),
-              userRole_Card(
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Community Head',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ),
-                    // const SizedBox(height: 3.0,),
-                    Text(
-                      'A group of people who stepped forward to help the needy.',
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromARGB(255, 49, 49, 49)),
-                    )
-                  ],
-                ),
-              ),
-              userRole_Card(
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Volunteer',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ),
-                    // const SizedBox(height: 3.0,),
-                    Text(
-                      'Person who is willing to help the needy at any cost.',
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromARGB(255, 49, 49, 49)),
-                    )
-                  ],
-                ),
-              ),
+
+              
               // SizedBox(height: ,),
               SizedBox(
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: FloatingActionButton.extended(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (count!=0)
+                     Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Ngo_SignInPage()));
+                  },
                   label: const Text(
                     'Next',
                     style: TextStyle(
