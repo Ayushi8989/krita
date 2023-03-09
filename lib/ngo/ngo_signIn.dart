@@ -3,6 +3,7 @@ import 'package:icons_plus/icons_plus.dart';
 
 import 'package:krita/ngo/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signup.dart';
+import 'package:krita/ngo/userRole.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 
@@ -115,7 +116,14 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: FloatingActionButton.extended(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const userRole(),
+                                ),
+                              );
+                          },
                           label: const Text(
                             'Sign In',
                             style: TextStyle(

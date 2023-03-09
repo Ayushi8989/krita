@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:krita/ngo/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signIn.dart';
+import 'package:krita/ngo/userRole.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
 const bg_color = Color.fromARGB(255, 255, 255, 255);
@@ -139,9 +140,16 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: FloatingActionButton.extended(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const userRole(),
+                                ),
+                              );
+                          },
                           label: const Text(
-                            'Sign In',
+                            'Sign Up',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -149,6 +157,9 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                           ),
                           backgroundColor: color,
                         ),
+                      ),
+                      SizedBox( 
+                        height: 20.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
