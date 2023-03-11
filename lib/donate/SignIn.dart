@@ -3,8 +3,9 @@ import 'SignUp.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:krita/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:krita/constants.dart';
 
-const color = Color.fromARGB(230, 247, 149, 30);
+//const color = Color.fromARGB(230, 247, 149, 30);
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -26,14 +27,14 @@ class _State extends State<SignInPage> {
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                color: color,
+                color: main_theme,
                 iconSize: 30,
                 //replace with our own icon data.
               ),
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: bg_color,
             // resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
               child: Center(
@@ -49,7 +50,7 @@ class _State extends State<SignInPage> {
                               'Krita',
                               style: TextStyle(
                                   fontFamily: 'SAMAN',
-                                  color: color,
+                                  color: main_theme,
                                   fontSize: 105),
                             )),
                         //sign up container
@@ -88,8 +89,7 @@ class _State extends State<SignInPage> {
                                           style: TextStyle(
                                             fontSize: 30,
                                             fontWeight: FontWeight.w700,
-                                            color: Color.fromARGB(
-                                                255, 247, 149, 30),
+                                            color: main_theme,
                                           )),
                                     ),
                                     Container(
@@ -132,7 +132,7 @@ class _State extends State<SignInPage> {
                                     ),
                                     const Text('or',
                                         style: TextStyle(
-                                          color: color,
+                                          color: main_theme,
                                           fontWeight: FontWeight.w500,
                                         )),
                                     Container(
@@ -199,7 +199,7 @@ class _State extends State<SignInPage> {
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(50),
                                           ),
-                                          color: color,
+                                          color: main_theme,
                                         ),
                                         child: Container(
                                           width: 300,

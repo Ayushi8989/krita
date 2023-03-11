@@ -4,8 +4,9 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:krita/ngo/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signup.dart';
 import 'package:krita/ngo/userRole.dart';
+import 'package:krita/constants.dart';
 
-const color = Color.fromARGB(230, 247, 149, 30);
+// const color = Color.fromARGB(230, 247, 149, 30);
 
 class Ngo_SignInPage extends StatefulWidget {
   const Ngo_SignInPage({super.key});
@@ -18,14 +19,14 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: bg_color,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back_sharp),
-          color: color,
+          color: main_theme,
           iconSize: 30,
         ),
         backgroundColor: Colors.transparent,
@@ -42,7 +43,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                 style:
                     TextStyle(
                       fontFamily: 'SAMAN', 
-                      color: color, 
+                      color: main_theme, 
                       fontSize: 105
                     ),
               ),
@@ -54,7 +55,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
               child: Container(
                 margin: const EdgeInsets.only(top: 100),
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(243, 243, 243, 243),
+                  color: bg_color,
                   borderRadius: BorderRadius.vertical(
                       top: Radius.circular(40.0), 
                       bottom: Radius.circular(0.0)),
@@ -77,7 +78,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w500,
-                          color: color,
+                          color: main_theme,
                         ),
                       ),
                       Padding(
@@ -131,7 +132,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          backgroundColor: color,
+                          backgroundColor: main_theme,
                         ),
                       ),
                       const Padding(

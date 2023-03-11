@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:krita/ngo/userRoleCard.dart';
 
 import 'ngo_signIn.dart';
-
-const color = Color.fromARGB(230, 247, 149, 30);
-const bg_color = Color.fromARGB(255, 255, 255, 255);
+import 'package:krita/constants.dart';
+// const color = Color.fromARGB(230, 247, 149, 30);
+// const bg_color = Color.fromARGB(255, 255, 255, 255);
 
 class userRole extends StatefulWidget {
   const userRole({super.key});
@@ -13,9 +14,8 @@ class userRole extends StatefulWidget {
 }
 
 class _userRoleState extends State<userRole> {
+  int count = 0;
 
-  int count =0;
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class _userRoleState extends State<userRole> {
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back_sharp),
-          color: color,
+          color: main_theme,
           iconSize: 30,
         ),
         backgroundColor: Colors.transparent,
@@ -34,7 +34,7 @@ class _userRoleState extends State<userRole> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
@@ -59,23 +59,54 @@ class _userRoleState extends State<userRole> {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.w700,
-                      color: color,
+                      color: main_theme,
                     ),
                   ),
                 ],
               ),
-              
+              GestureDetector(
+                onTap: () => setState(() {
+                  count = 1;
+                }),
+                child: userRole_Card(
+                  heading: 'Organisation Head',
+                  description: 'An NGO which consists of more than 100 active members',
+                  isClicked: count == 1 ? true : false,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => setState(() {
+                  count = 2;
+                }),
+                child: userRole_Card(
+                  heading: 'Community Head',
+                  description:
+                      'A group of people who stepped forward to help the needy.',
+                  isClicked: count == 2 ? true : false,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => setState(() {
+                  count = 3;
+                }),
+                child: userRole_Card(
+                  heading: 'Volunteer',
+                  description:
+                      'Person who is willing to help the needy at any cost.',
+                  isClicked: count == 3 ? true : false,
+                ),
+              ),
               SizedBox(
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: FloatingActionButton.extended(
                   onPressed: () {
-                    if (count!=0)
-                     Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Ngo_SignInPage()));
+                    if (count != 0) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Ngo_SignInPage()));
+                    }
                   },
                   label: const Text(
                     'Next',
@@ -84,11 +115,10 @@ class _userRoleState extends State<userRole> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  backgroundColor: color,
+                  backgroundColor: main_theme,
                 ),
               ),
-            ]
-          ),
+            ]),
       ),
     );
   }

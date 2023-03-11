@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'donate/SignIn.dart';
 import 'ngo/ngo_signIn.dart';
+import 'constants.dart';
 
-const color = Color.fromARGB(230, 247, 149, 30);
+// const color = Color.fromARGB(230, 247, 149, 30);
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.menu_rounded),
-            color: color,
+            color: main_theme,
             iconSize: 30,
           ),
           backgroundColor: Colors.transparent,
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
                   child: const Text(
                     'Krita',
                     style: TextStyle(
-                        fontFamily: 'SAMAN', color: color, fontSize: 105),
+                        fontFamily: 'SAMAN', color: main_theme, fontSize: 105),
                   ),
                 ),
                 Container(
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
                               width: 100.0,
                               child: FloatingActionButton(
                                 heroTag: "btn1",
-                                backgroundColor: color,
+                                backgroundColor: main_theme,
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -89,7 +90,7 @@ class HomePage extends StatelessWidget {
                               width: 100.0,
                               child: FloatingActionButton(
                                 heroTag: "btn2",
-                                backgroundColor: color,
+                                backgroundColor: main_theme,
                                 onPressed: () {
                                    Navigator.push(
                                       context,
@@ -150,7 +151,7 @@ class HomePage extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 86),
                 width: double.infinity,
                 height: 50,
-                color: color,
+                color: main_theme,
                 child: const Text('...',
                     style: TextStyle(
                       color: Colors.white,
