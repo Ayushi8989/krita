@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:krita/ngo/userRoleCard.dart';
 
 import 'ngo_signIn.dart';
-
-const color = Color.fromARGB(230, 247, 149, 30);
-const bg_color = Color.fromARGB(255, 255, 255, 255);
+import 'package:krita/constants.dart';
+// const color = Color.fromARGB(230, 247, 149, 30);
+// const bg_color = Color.fromARGB(255, 255, 255, 255);
 
 class userRole extends StatefulWidget {
   const userRole({super.key});
@@ -26,7 +26,7 @@ class _userRoleState extends State<userRole> {
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back_sharp),
-          color: color,
+          color: main_theme,
           iconSize: 30,
         ),
         backgroundColor: Colors.transparent,
@@ -59,7 +59,7 @@ class _userRoleState extends State<userRole> {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.w700,
-                      color: color,
+                      color: main_theme,
                     ),
                   ),
                 ],
@@ -115,7 +115,7 @@ class _userRoleState extends State<userRole> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  backgroundColor: color,
+                  backgroundColor: main_theme,
                 ),
               ),
             ]),

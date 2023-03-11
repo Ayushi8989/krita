@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:krita/constants.dart';
+
 class userRole_Card extends StatefulWidget {
   final String heading;
   final String description;
@@ -17,12 +19,12 @@ class _userRole_CardState extends State<userRole_Card> {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 20.0),
-      color: widget.isClicked ? const Color.fromARGB(230, 255, 216, 168) : const Color.fromARGB(255, 240, 239, 239),
+      color: widget.isClicked ? Color.fromARGB(230, 255, 227, 168) : Color.fromARGB(225, 230, 228, 228),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         side: BorderSide(
-          color: widget.isClicked ? const Color.fromARGB(230, 247, 149, 30) : const Color.fromARGB(255, 240, 239, 239),
+          color: widget.isClicked ? main_theme : Color.fromARGB(225, 230, 228, 228),
           width: 2,
         ),
       ),
