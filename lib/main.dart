@@ -10,8 +10,9 @@ import 'dart:async';
 import 'homePage.dart';
 import 'donate/SignIn.dart';
 import 'ngo/ngo_signin.dart';
+import 'constants.dart';
 
-const color = Color.fromARGB(230, 247, 149, 30);
+//const color = Color.fromARGB(255, 251, 167, 0);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -88,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: color,
+      color: main_theme,
       child: const Center(
         child: Text(
           'Krita',

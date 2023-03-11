@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:krita/ngo/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signIn.dart';
 import 'package:krita/ngo/userRole.dart';
-
-const color = Color.fromARGB(230, 247, 149, 30);
-const bg_color = Color.fromARGB(255, 255, 255, 255);
+import 'package:krita/constants.dart';
+// const color = Color.fromARGB(230, 247, 149, 30);
 
 class Ngo_SignUpPage extends StatefulWidget {
   const Ngo_SignUpPage({super.key});
@@ -25,7 +24,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back_sharp),
-          color: color,
+          color: main_theme,
           iconSize: 30,
         ),
         backgroundColor: Colors.transparent,
@@ -42,8 +41,8 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                 style:
                     TextStyle(
                       fontFamily: 'SAMAN', 
-                      color: color, 
-                      fontSize: 105
+                      color: main_theme, 
+                      fontSize: 105,
                     ),
               ),
             ),
@@ -54,7 +53,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
               child: Container(
                 margin: const EdgeInsets.only(top: 35),
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(243, 243, 243, 243),
+                  color: bg_color,
                   borderRadius: BorderRadius.vertical(
                       top: Radius.circular(40.0), 
                       bottom: Radius.circular(0.0)),
@@ -77,7 +76,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w500,
-                          color: color,
+                          color: main_theme,
                         ),
                       ),
                       Padding(
@@ -155,7 +154,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          backgroundColor: color,
+                          backgroundColor: main_theme,
                         ),
                       ),
                       SizedBox( 
