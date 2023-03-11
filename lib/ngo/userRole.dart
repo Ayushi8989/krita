@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:krita/ngo/mainPage.dart';
 import 'package:krita/ngo/userRoleCard.dart';
 
 import 'ngo_signIn.dart';
 import 'package:krita/constants.dart';
-// const color = Color.fromARGB(230, 247, 149, 30);
-// const bg_color = Color.fromARGB(255, 255, 255, 255);
 
 class userRole extends StatefulWidget {
   const userRole({super.key});
@@ -105,7 +104,9 @@ class _userRoleState extends State<userRole> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Ngo_SignInPage()));
+                              builder: (context) => const mainScreen()
+                          )
+                      );
                     }
                   },
                   label: const Text(
