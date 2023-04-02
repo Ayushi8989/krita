@@ -43,6 +43,7 @@ dependencies:
   google_sign_in: ^6.0.2
   provider: ^6.0.5
   icons_plus: ^4.0.0
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

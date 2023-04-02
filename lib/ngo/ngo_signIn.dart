@@ -17,6 +17,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       backgroundColor: bg_color,
       appBar: AppBar(
         leading: IconButton(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:krita/ngo/mainPage.dart';
+import 'package:krita/ngo/screen.dart';
 import 'package:krita/ngo/userRoleCard.dart';
 
-import 'ngo_signIn.dart';
 import 'package:krita/constants.dart';
 
 class userRole extends StatefulWidget {
@@ -11,6 +11,7 @@ class userRole extends StatefulWidget {
   @override
   State<userRole> createState() => _userRoleState();
 }
+
 
 class _userRoleState extends State<userRole> {
   int count = 0;
@@ -104,7 +105,7 @@ class _userRoleState extends State<userRole> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const mainScreen()
+                              builder: (context) => const Screen()
                           )
                       );
                     }

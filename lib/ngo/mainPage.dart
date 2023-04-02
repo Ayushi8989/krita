@@ -41,6 +41,20 @@ class _mainScreenState extends State<mainScreen> {
             ),
           ),
         ],
+
+        // bottom: TabBar(
+        //   tabs: [
+        //     Tab(
+        //       child: Container(),
+        //     ),
+        //     Tab(
+        //       icon: Icon(
+        //         FontAwesome.filter
+        //       ),
+        //     ),
+        //   ],
+        // ),
+
       ),
 
       body: Column(
