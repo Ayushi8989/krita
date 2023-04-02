@@ -12,8 +12,6 @@ import 'donate/SignIn.dart';
 import 'ngo/ngo_signin.dart';
 import 'constants.dart';
 
-//const color = Color.fromARGB(255, 251, 167, 0);
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
