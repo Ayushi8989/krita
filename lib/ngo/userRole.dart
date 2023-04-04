@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:krita/ngo/mainPage.dart';
-import 'package:krita/ngo/screen.dart';
 import 'package:krita/ngo/userRoleCard.dart';
 
 import 'package:krita/constants.dart';
@@ -105,7 +104,7 @@ class _userRoleState extends State<userRole> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Screen()
+                              builder: (context) => const MainPage()
                           )
                       );
                     }
