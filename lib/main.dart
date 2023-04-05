@@ -12,18 +12,20 @@ import 'donate/SignIn.dart';
 import 'ngo/ngo_signin.dart';
 import 'constants.dart';
 
+//const color = Color.fromARGB(255, 251, 167, 0);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    const MyApp());
+  runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSigninProvider(),
+        create: (context) => Authentication(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -51,7 +53,7 @@ class _RoutesState extends State<Routes> {
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the HomePage widget.
-        '/' : (context) => const HomePage(),
+        '/': (context) => const HomePage(),
         // When navigating to the "/donate_SignIn" route, build the SignIn widget of donate branch.
         '/donate_SignIn': (context) => const SignInPage(),
         // When navigating to the "/donate_SignUp" route, build the SignUp widget of donate branch.
@@ -79,9 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomePage())
-            )
-      );
+            MaterialPageRoute(builder: (context) => const HomePage())));
   }
 
   @override
@@ -102,4 +102,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
