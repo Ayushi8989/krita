@@ -32,43 +32,39 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 70),
-              child: const Text(
-                'Krita',
-                style:
-                    TextStyle(
-                      fontFamily: 'SAMAN', 
-                      color: main_theme, 
-                      fontSize: 105
-                    ),
-              ),
-            ),
-
-            //SignIn Container starts here
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 279,
-              child: Container(
-                margin: const EdgeInsets.only(top: 100),
-                decoration: const BoxDecoration(
-                  color: bg_color,
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(40.0), 
-                      bottom: Radius.circular(0.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(34, 0, 0, 0),
-                      offset: Offset(10, -10),
-                      blurRadius: 15,
-                      spreadRadius: 6.0,
-                    )
-                  ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 70),
+                child: const Text(
+                  'Krita',
+                  style: TextStyle(
+                      fontFamily: 'SAMAN', color: main_theme, fontSize: 105),
                 ),
-                child: SingleChildScrollView(
+              ),
+
+              //SignIn Container starts here
+              SizedBox(
+                height: MediaQuery.of(context).size.height - 279,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 100),
+                  decoration: const BoxDecoration(
+                    color: bg_color,
+                    borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(40.0),
+                        bottom: Radius.circular(0.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(34, 0, 0, 0),
+                        offset: Offset(10, -10),
+                        blurRadius: 15,
+                        spreadRadius: 6.0,
+                      )
+                    ],
+                  ),
                   padding: const EdgeInsets.fromLTRB(30, 30, 30, 15),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -119,11 +115,11 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         child: FloatingActionButton.extended(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const userRole(),
-                                ),
-                              );
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const userRole(),
+                              ),
+                            );
                           },
                           label: const Text(
                             'Sign In',
@@ -174,8 +170,8 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -30,43 +30,42 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 30),
-              child: const Text(
-                'Krita',
-                style:
-                    TextStyle(
-                      fontFamily: 'SAMAN', 
-                      color: main_theme, 
-                      fontSize: 105,
-                    ),
-              ),
-            ),
-
-            //SignUp Container starts here
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 239,
-              child: Container(
-                margin: const EdgeInsets.only(top: 35),
-                decoration: const BoxDecoration(
-                  color: bg_color,
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(40.0), 
-                      bottom: Radius.circular(0.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(34, 0, 0, 0),
-                      offset: Offset(10, -10),
-                      blurRadius: 15,
-                      spreadRadius: 6.0,
-                    )
-                  ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 30),
+                child: const Text(
+                  'Krita',
+                  style: TextStyle(
+                    fontFamily: 'SAMAN',
+                    color: main_theme,
+                    fontSize: 105,
+                  ),
                 ),
-                child: SingleChildScrollView(
+              ),
+
+              //SignUp Container starts here
+              SizedBox(
+                height: MediaQuery.of(context).size.height - 239,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 35),
+                  decoration: const BoxDecoration(
+                    color: bg_color,
+                    borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(40.0),
+                        bottom: Radius.circular(0.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(34, 0, 0, 0),
+                        offset: Offset(10, -10),
+                        blurRadius: 15,
+                        spreadRadius: 6.0,
+                      )
+                    ],
+                  ),
                   padding: const EdgeInsets.fromLTRB(30, 30, 30, 15),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -141,11 +140,11 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                         child: FloatingActionButton.extended(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const userRole(),
-                                ),
-                              );
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const userRole(),
+                              ),
+                            );
                           },
                           label: const Text(
                             'Sign Up',
@@ -157,7 +156,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                           backgroundColor: main_theme,
                         ),
                       ),
-                      SizedBox( 
+                      SizedBox(
                         height: 20.0,
                       ),
                       Row(
@@ -185,8 +184,8 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
