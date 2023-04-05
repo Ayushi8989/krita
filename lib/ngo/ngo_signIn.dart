@@ -6,8 +6,6 @@ import 'package:krita/ngo/ngo_signup.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
 
-// const color = Color.fromARGB(230, 247, 149, 30);
-
 class Ngo_SignInPage extends StatefulWidget {
   const Ngo_SignInPage({super.key});
 
@@ -19,6 +17,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       backgroundColor: bg_color,
       appBar: AppBar(
         leading: IconButton(
