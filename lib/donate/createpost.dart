@@ -1,25 +1,40 @@
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:krita/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:krita/donate/SignUp.dart';
+import 'package:krita/provider/sign_in_provider.dart';
+import 'package:uuid/uuid.dart';
+import 'package:geocoding/geocoding.dart';
 
-class createpost extends StatefulWidget {
-  const createpost({super.key});
+final Reference storageref = FirebaseStorage.instance.ref();
+User? user;
+String? mediaUrl;
+
+class CreatePost extends StatefulWidget {
+  const CreatePost({super.key});
   @override
-  postState createState() => postState();
+  PostState createState() => PostState();
 }
 
-class postState extends State<createpost> {
+class PostState extends State<CreatePost> {
+  bool isUploading = false;
+  bool status = false;
+  String postId = const Uuid().v4();
   XFile? file;
+  TextEditingController locationController = TextEditingController();
+  TextEditingController foodItemController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
 
-  handletakephoto() async {
+  fromCamera() async {
     Navigator.pop(context);
-
     var img = await ImagePicker().pickImage(
       source: ImageSource.camera,
       maxHeight: 675,
@@ -28,12 +43,12 @@ class postState extends State<createpost> {
     setState(() {
       file = img;
     });
-    uploadFile(img as File);
+    File image = File(img!.path);
+    uploadFile(image);
   }
 
-  fromgallery() async {
+  fromGallery() async {
     Navigator.pop(context);
-
     var image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       maxHeight: 675,
@@ -42,7 +57,8 @@ class postState extends State<createpost> {
     setState(() {
       file = image;
     });
-    uploadFile(image as File);
+    File imagee = File(image!.path);
+    uploadFile(imagee);
   }
 
   selectImage(parentContext) {
@@ -50,19 +66,27 @@ class postState extends State<createpost> {
         context: parentContext,
         builder: (context) {
           return SimpleDialog(
-            title: Text('Upload Image'),
+            title: const Text('Upload Image'),
             children: <Widget>[
               SimpleDialogOption(
-                child: Text("Camera"),
-                onPressed: handletakephoto,
+                onPressed: fromCamera,
+                child: const Text("Camera"),
               ),
               SimpleDialogOption(
-                child: Text("Gallery"),
-                onPressed: fromgallery,
+                onPressed: fromGallery,
+                child: const Text("Gallery"),
               ),
             ],
           );
         });
+  }
+
+  Future<String> uploadimage(imagefile) async {
+    UploadTask uploadTask =
+        storageref.child('post_$postId.jpg').putFile(imagefile);
+    TaskSnapshot storagesnap = await uploadTask;
+    String downloadurl = await storagesnap.ref.getDownloadURL();
+    return downloadurl;
   }
 
   Future<String> uploadFile(File image) async {
@@ -74,17 +98,53 @@ class postState extends State<createpost> {
         .child("post_$postId.jpg");
     await ref.putFile(image);
     downloadURL = await ref.getDownloadURL();
-    print(downloadURL);
     return downloadURL;
   }
 
-// uploadToFirebase()async
-// {
-// String url=await uploadFile(image); // this will upload the file and store url in the variable 'url'
-// await users.doc(uid).update({  //use update to update the doc fields.
-// 'url':url
-// });
-// }
+  Future<void> userSetup(User? user, String location, String foodItem,
+      String time, String date, String quantity, String? mediaurl) async {
+    User? user = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance.collection('Users').doc(user?.uid).set({
+      'displayName': user?.displayName,
+      'uid': user?.uid,
+      "postId": postId,
+      "location": location,
+      "fooditem": foodItem,
+      "time": time,
+      "date": date,
+      "quantity": quantity,
+      "mediaurl": mediaurl,
+    });
+    setState(() {
+      status = true;
+    });
+  }
+
+  Future<void> getUserCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark placemark = placemarks[0];
+    setState(() {
+      locationController.text =
+          "${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}";
+    });
+  }
+
+  Future<void> datetime() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        dateController.text = picked.toString();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +154,13 @@ class postState extends State<createpost> {
         home: Scaffold(
           body: SingleChildScrollView(
             child: Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 30),
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
               height: MediaQuery.of(context).size.height * 0.8,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: [
+                  isUploading
+                      ? const LinearProgressIndicator()
+                      : const Text(""),
                   const Text(
                     'Donate Food Details',
                     style: TextStyle(
@@ -108,72 +170,108 @@ class postState extends State<createpost> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: "PickUp Where?",
-                      ),
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  Container(
+                    padding: const EdgeInsets.only(left: 15),
                     margin: const EdgeInsets.only(top: 40),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: foodItemController,
+                      decoration: const InputDecoration(
                         hintText: "Food Item(s)",
+                        border: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: "Prefered Time",
+                  const Divider(),
+                  ListTile(
+                    title: TextField(
+                      controller: locationController,
+                      decoration: const InputDecoration(
+                        hintText: "PickUp Where?",
+                        border: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    trailing: IconButton(
+                        icon: const Icon(
+                          Icons.pin_drop_outlined,
+                          color: main_theme,
+                        ),
+                        onPressed: getUserCurrentLocation),
+                  ),
+                  const Divider(),
+                  Container(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 5,
+                      onChanged: (value) {
+                        if (timeController.text.length == 2) {
+                          timeController.text = "${timeController.text}:";
+                        }
+                      },
+                      controller: timeController,
+                      decoration: const InputDecoration(
+                        hintText: "Prefered Time (Use 24hrs format)",
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                  const Divider(),
+                  ListTile(
+                    title: TextField(
+                      controller: dateController,
+                      decoration: const InputDecoration(
                         hintText: "PickUp Date",
+                        border: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
+                    trailing: IconButton(
+                        icon: const Icon(
+                          Icons.calendar_today,
+                          color: main_theme,
+                        ),
+                        onPressed: () {
+                          datetime();
+                        }),
                   ),
+                  const Divider(),
                   Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      controller: quantityController,
+                      decoration: const InputDecoration(
                         hintText: "Quantity",
+                        border: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
                   ),
+                  const Divider(),
                   const SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   const Text(
                     'Add Photos',
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: Color.fromARGB(255, 117, 117, 117),
                       fontSize: 12,
                     ),
                   ),
@@ -190,25 +288,61 @@ class postState extends State<createpost> {
                             ),
                           ),
                         )
-                      : DottedBorder(
-                          padding: const EdgeInsets.all(20),
-                          color: const Color.fromRGBO(158, 158, 158, 1),
-                          strokeWidth: 1,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.add_box_rounded,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              selectImage(context);
-                            },
-                          )),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
+                      : Container(
+                          margin: const EdgeInsets.only(right: 280.0),
+                          child: DottedBorder(
+                              padding: const EdgeInsets.all(20),
+                              color: const Color.fromRGBO(158, 158, 158, 1),
+                              strokeWidth: 1,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.add_box_rounded,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  selectImage(context);
+                                },
+                              ))),
+                  const Padding(padding: EdgeInsets.only(top: 30)),
                   SizedBox(
                     height: 50,
                     width: MediaQuery.of(context).size.width * 1,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          user = await Authentication.signInWithGoogle(
+                              context: context);
+                          isUploading
+                              ? null
+                              : setState(() {
+                                  isUploading = true;
+                                });
+                          // await compressImage();
+                          File image = File(file!.path);
+                          mediaUrl = await uploadimage(image);
+                          String location = locationController.text;
+                          String foodItem = foodItemController.text;
+                          String time = timeController.text;
+                          String date = dateController.text;
+                          String quantity = quantityController.text;
+                          userSetup(user, location, foodItem, time, date,
+                              quantity, mediaUrl);
+                          locationController.clear();
+                          foodItemController.clear();
+                          timeController.clear();
+                          dateController.clear();
+                          quantityController.clear();
+                          setState(() {
+                            file = null;
+                            isUploading = false;
+                          });
+                          if (status == true && context.mounted) {
+                            const snackBar = SnackBar(
+                              content: Text('Post Uploaded!'),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(main_theme),
@@ -222,3 +356,4 @@ class postState extends State<createpost> {
         ));
   }
 }
+//todo: null values => snackbar and disable linearprogrss bar
