@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
@@ -92,14 +93,14 @@ class _MainPageState extends State<MainPage> {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width * 0.7,
-                        height: MediaQuery.of(context).size.height * 0.3,
+                        // height: MediaQuery.of(context).size.height * 0.4,
                         padding: new EdgeInsets.all(10.0),
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           elevation: 5,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -176,7 +177,29 @@ class _MainPageState extends State<MainPage> {
                                   ],
                                 ),
                               ),
-
+                              Container(
+                                  height: MediaQuery.of(context).size.height * 0.1,
+                                  width: MediaQuery.of(context).size.width * 0.7,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 1.0,
+                                      color: Color.fromARGB(255, 131, 131, 131)
+                                    ),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                                child: Text(
+                                  'We have an excess of 50 meals and want to donate them',
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(195, 79, 79, 79),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
