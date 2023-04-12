@@ -104,7 +104,12 @@ class PostState extends State<CreatePost> {
   Future<void> userSetup(User? user, String location, String foodItem,
       String time, String date, String quantity, String? mediaurl) async {
     User? user = FirebaseAuth.instance.currentUser;
-    FirebaseFirestore.instance.collection('Users').doc(user?.uid).set({
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user?.uid)
+        .collection('userpost')
+        .doc(postId)
+        .set({
       'displayName': user?.displayName,
       'uid': user?.uid,
       "postId": postId,

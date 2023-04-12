@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
 import 'package:krita/donate/SignIn.dart';
+import 'package:krita/donate/main.dart';
+import 'package:krita/donate/userFeed.dart';
 import 'package:krita/ngo/userRoleCard.dart';
 
 class form extends StatefulWidget {
@@ -96,7 +98,7 @@ class _State extends State<form> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignInPage(),
+                          builder: (context) => UserFeed(),
                         ));
                   }
                 },

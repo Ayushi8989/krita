@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:krita/donate/SignIn.dart';
+import 'package:krita/donate/createpost.dart';
+import 'package:krita/donate/main.dart';
 import 'package:krita/provider/sign_in_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:krita/donate/profile.dart';
@@ -13,6 +16,14 @@ class UserFeed extends StatefulWidget {
 }
 
 class UserFeedState extends State<UserFeed> {
+  int selectedpage = 0;
+
+  final _pageOptions = [
+    MainPage(),
+    CreatePost(),
+    SignInPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +50,7 @@ class UserFeedState extends State<UserFeed> {
                 if (user != null) {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => Profile(user: user),
+                      builder: (context) => profile(user: user),
                     ),
                   );
                 }
@@ -53,41 +64,42 @@ class UserFeedState extends State<UserFeed> {
           ),
         ],
       ),
-      body: Column(
-        children: [Text('data')],
-      ),
+      body: _pageOptions[selectedpage],
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              color: main_theme,
-              size: 35,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home_outlined,
+                color: main_theme,
+                size: 35,
+              ),
+              label: 'Home',
             ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add_circle_outline_sharp,
-              //Bootstrap.plus_circle,
-              color: main_theme,
-              size: 35,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add_circle_outline_sharp,
+                //Bootstrap.plus_circle,
+                color: main_theme,
+                size: 35,
+              ),
+              label: 'Add post',
             ),
-            label: 'Add post',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Bootstrap.chat_dots,
-              color: main_theme,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Bootstrap.chat_dots,
+                color: main_theme,
+                size: 30,
+              ),
+              label: 'Chats',
             ),
-            label: 'Chats',
-          ),
-        ],
-        //currentIndex: ,
-        //selectedItemColor: main_theme,
-        //onTap: ,
-      ),
+          ],
+          currentIndex: selectedpage,
+          selectedItemColor: main_theme,
+          onTap: (index) {
+            setState(() {
+              selectedpage = index;
+            });
+          }),
     );
   }
 }
