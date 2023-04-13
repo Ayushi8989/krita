@@ -24,6 +24,7 @@ class Authentication {
     return credentials.user;
   }
 
+
   Future<void> logout() async => await FirebaseAuth.instance.signOut();
 }
 
