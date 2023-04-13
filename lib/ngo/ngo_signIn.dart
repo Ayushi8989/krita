@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -5,6 +6,7 @@ import 'package:krita/ngo/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signup.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
+import 'package:krita/provider/authentication.dart';
 
 class Ngo_SignInPage extends StatefulWidget {
   const Ngo_SignInPage({super.key});
@@ -14,6 +16,8 @@ class Ngo_SignInPage extends StatefulWidget {
 }
 
 class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
+  Authentication auth = Authentication();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,9 +147,23 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Logo(Logos.facebook_logo),
-                          Logo(Logos.google),
-                          const Icon(FontAwesome.phone),
+                          TextButton(
+                            onPressed: () async{
+                              await auth.logout();
+                            },
+                              child: Logo(Logos.facebook_logo)
+                          ),
+                          TextButton(
+                            onPressed: () async{
+                              var user = await auth.signInWithGoogle();
+                              print(user!.email);
+                            },
+                              child: Logo(Logos.google)
+                          ),
+                          TextButton(
+                          onPressed: () {},
+                          child: Icon(FontAwesome.phone)
+                          ),
                         ],
                       ),
                       Row(

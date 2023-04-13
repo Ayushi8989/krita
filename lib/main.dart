@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:krita/donate/SignUp.dart';
 import 'package:krita/ngo/ngo_signup.dart';
+import 'package:krita/provider/authentication.dart';
 
 import 'package:krita/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'dart:async';
+import 'package:get/get.dart';
 
 import 'homePage.dart';
 import 'donate/SignIn.dart';
@@ -14,10 +17,10 @@ import 'constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(
-    const MyApp());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -51,7 +54,7 @@ class _RoutesState extends State<Routes> {
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the HomePage widget.
-        '/' : (context) => const HomePage(),
+        '/': (context) => const HomePage(),
         // When navigating to the "/donate_SignIn" route, build the SignIn widget of donate branch.
         '/donate_SignIn': (context) => const SignInPage(),
         // When navigating to the "/donate_SignUp" route, build the SignUp widget of donate branch.
@@ -79,9 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomePage())
-            )
-      );
+            MaterialPageRoute(builder: (context) => const HomePage())));
   }
 
   @override
@@ -102,4 +103,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
