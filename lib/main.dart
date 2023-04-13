@@ -15,9 +15,15 @@ import 'donate/SignIn.dart';
 import 'ngo/ngo_signin.dart';
 import 'constants.dart';
 
+//const color = Color.fromARGB(255, 251, 167, 0);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+<<<<<<< HEAD
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+=======
+  await Firebase.initializeApp();
+>>>>>>> 74e3cb2ec319f9cf4aadb7abcdd2758e86bc5391
   runApp(const MyApp());
 }
 
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSigninProvider(),
+        create: (context) => Authentication(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

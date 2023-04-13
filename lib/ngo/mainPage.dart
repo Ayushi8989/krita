@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+<<<<<<< HEAD
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:icons_plus/icons_plus.dart';
+
+=======
+>>>>>>> 74e3cb2ec319f9cf4aadb7abcdd2758e86bc5391
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -93,14 +99,22 @@ class _MainPageState extends State<MainPage> {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width * 0.7,
+<<<<<<< HEAD
                         // height: MediaQuery.of(context).size.height * 0.4,
+=======
+                        height: MediaQuery.of(context).size.height * 0.3,
+>>>>>>> 74e3cb2ec319f9cf4aadb7abcdd2758e86bc5391
                         padding: new EdgeInsets.all(10.0),
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           elevation: 5,
+<<<<<<< HEAD
                           child: Column(
+=======
+                          child: const Column(
+>>>>>>> 74e3cb2ec319f9cf4aadb7abcdd2758e86bc5391
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -177,6 +191,7 @@ class _MainPageState extends State<MainPage> {
                                   ],
                                 ),
                               ),
+<<<<<<< HEAD
                               Container(
                                   height: MediaQuery.of(context).size.height * 0.1,
                                   width: MediaQuery.of(context).size.width * 0.7,
@@ -200,6 +215,9 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                               ),
+=======
+
+>>>>>>> 74e3cb2ec319f9cf4aadb7abcdd2758e86bc5391
                             ],
                           ),
                         ),

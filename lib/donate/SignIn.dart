@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:krita/donate/form.dart';
 import 'SignUp.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:krita/provider/sign_in_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:krita/constants.dart';
 
 //const color = Color.fromARGB(230, 247, 149, 30);
@@ -15,6 +16,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _State extends State<SignInPage> {
+  bool _isSigningIn = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -106,12 +109,27 @@ class _State extends State<SignInPage> {
                                             foregroundColor: Colors.black,
                                             minimumSize: const Size(
                                                 double.infinity, 50)),
-                                        onPressed: () {
-                                          final provider =
-                                              Provider.of<GoogleSigninProvider>(
-                                                  context,
-                                                  listen: false);
-                                          provider.googleLogin();
+                                        onPressed: () async {
+                                          setState(() {
+                                            _isSigningIn = true;
+                                          });
+
+                                          User? user = await Authentication
+                                              .signInWithGoogle(
+                                                  context: context);
+
+                                          setState(() {
+                                            _isSigningIn = false;
+                                          });
+
+                                          if (user != null) {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                              MaterialPageRoute(
+                                                builder: (context) => form(),
+                                              ),
+                                            );
+                                          }
                                         },
                                         // icon: Image.network(
                                         //   'http://pngimg.com/uploads/google/google_PNG19635.png',
