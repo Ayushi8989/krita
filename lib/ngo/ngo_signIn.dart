@@ -21,7 +21,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: bg_color,
       appBar: AppBar(
         leading: IconButton(
@@ -51,7 +51,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
 
               //SignIn Container starts here
               SizedBox(
-                height: MediaQuery.of(context).size.height - 279,
+                height: MediaQuery.of(context).size.height - 242,
                 child: Container(
                   margin: const EdgeInsets.only(top: 100),
                   decoration: const BoxDecoration(
@@ -85,26 +85,32 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            InputCard(
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  hintText: 'User Name',
-                                  border: InputBorder.none,
-                                  hintStyle: TextStyle(
-                                    color: Color.fromARGB(127, 117, 117, 117),
-                                    fontSize: 14,
+                            Container(
+                              height: 70,
+                              child: InputCard(
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    hintText: 'User Name',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Color.fromARGB(127, 117, 117, 117),
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                            InputCard(
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  hintText: 'Password',
-                                  border: InputBorder.none,
-                                  hintStyle: TextStyle(
-                                    color: Color.fromARGB(127, 117, 117, 117),
-                                    fontSize: 14,
+                            Container(
+                              height: 70,
+                              child: InputCard(
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    hintText: 'Password',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Color.fromARGB(127, 117, 117, 117),
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -144,22 +150,17 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           TextButton(
-                            onPressed: () async{
-                              await auth.logout();
-                            },
-                              child: Logo(Logos.facebook_logo)
-                          ),
+                              onPressed: () {
+                              },
+                              child: Logo(Logos.facebook_logo)),
                           TextButton(
-                            onPressed: () async{
-                              var user = await auth.signInWithGoogle();
-                              print(user!.email);
-                            },
-                              child: Logo(Logos.google)
-                          ),
+                              onPressed: () async {
+                                var user = await auth.signInWithGoogle();
+                                print(user!.email);
+                              },
+                              child: Logo(Logos.google)),
                           TextButton(
-                          onPressed: () {},
-                          child: Icon(FontAwesome.phone)
-                          ),
+                              onPressed: () {}, child: Icon(FontAwesome.phone)),
                         ],
                       ),
                       Row(
