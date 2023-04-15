@@ -14,6 +14,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  Authentication auth = Authentication();
+
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
     Bootstrap.house_door,
@@ -23,6 +27,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -34,7 +39,9 @@ class _MainPageState extends State<MainPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _key.currentState!.openEndDrawer();
+            },
             icon: const Icon(Icons.person),
             color: main_theme,
             iconSize: 50,
@@ -42,6 +49,69 @@ class _MainPageState extends State<MainPage> {
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
+      ),
+      endDrawer: Container(
+        width: MediaQuery.of(context).size.width * 0.6,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const UserAccountsDrawerHeader(
+                accountName: Text(
+                  "Hello Ame!",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                accountEmail: Text(
+                  "ame123@gmail.com",
+                ),
+                currentAccountPicture: ProfilePicture(
+                  name: 'Ame',
+                  radius: 20,
+                  fontsize: 21,
+                  random: true,
+                  count: 2,
+                ),
+              ),
+              ListTile(
+                leading: const Icon(
+                  Bootstrap.building_fill_gear,
+                  color: main_theme,
+                ),
+                title: const Text('Change Address'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Bootstrap.person_vcard,
+                  color: main_theme,
+                ),
+                title: const Text('Account Details'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              const Divider(
+                color: Colors.black,
+              ),
+              ListTile(
+                leading: const Icon(
+                  Bootstrap.box_arrow_right,
+                  color: main_theme,
+                ),
+                title: const Text('Log Out'),
+                onTap: () async{
+                  await auth.logout();
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
       ),
       body: Center(
         child: Padding(
@@ -54,8 +124,8 @@ class _MainPageState extends State<MainPage> {
                   Container(
                       height: MediaQuery.of(context).size.height * 0.05,
                       width: MediaQuery.of(context).size.width * 0.6,
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),
@@ -74,11 +144,11 @@ class _MainPageState extends State<MainPage> {
                           // ),
                           prefixIcon: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.search),
+                            icon: const Icon(Icons.search),
                           ),
                         ),
                       )),
-                  Icon(
+                  const Icon(
                     Bootstrap.sliders,
                     color: main_theme,
                   ),
@@ -86,7 +156,7 @@ class _MainPageState extends State<MainPage> {
               ),
               Expanded(
                 child: ListView(
-                  padding: EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 20.0),
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width * 0.7,
@@ -98,11 +168,11 @@ class _MainPageState extends State<MainPage> {
                         elevation: 5,
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Row(
@@ -117,14 +187,14 @@ class _MainPageState extends State<MainPage> {
                                           random: true,
                                           count: 2,
                                           img:
-                                              'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
+                                          'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
                                         ),
                                       ),
                                       Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                         // crossAxisAlignment: CrossAxisAlignment.baseline,
                                         children: [
                                           Text(
@@ -155,7 +225,7 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    EdgeInsets.symmetric(horizontal: 12.0),
                                     child: Column(
                                       children: [
                                         Icon(
@@ -182,11 +252,11 @@ class _MainPageState extends State<MainPage> {
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 1.0,
-                                    color: Color.fromARGB(255, 131, 131, 131)),
+                                    color: const Color.fromARGB(255, 131, 131, 131)),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 20.0),
                               child: Text(
@@ -210,16 +280,16 @@ class _MainPageState extends State<MainPage> {
                                   Container(
                                     height: 30,
                                     // width: 70,
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1.5,
-                                        color: Color.fromARGB(255, 242, 84, 84),
+                                        color: const Color.fromARGB(255, 242, 84, 84),
                                       ),
-                                      color: Color.fromARGB(255, 255, 215, 215),
+                                      color: const Color.fromARGB(255, 255, 215, 215),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Non-Veg',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -231,16 +301,16 @@ class _MainPageState extends State<MainPage> {
                                   Container(
                                     height: 30,
                                     // width: 45,
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1.5,
-                                        color: Color.fromARGB(255, 76, 126, 58),
+                                        color: const Color.fromARGB(255, 76, 126, 58),
                                       ),
-                                      color: Color.fromARGB(255, 221, 253, 196),
+                                      color: const Color.fromARGB(255, 221, 253, 196),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Veg',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -251,16 +321,16 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Container(
                                     height: 30,
-                                    constraints: BoxConstraints(minWidth: 50, maxWidth: 100),                                    padding: EdgeInsets.all(5.0),
+                                    constraints: const BoxConstraints(minWidth: 50, maxWidth: 100),                                    padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1.5,
-                                        color: Color.fromARGB(100, 79, 79, 79),
+                                        color: const Color.fromARGB(100, 79, 79, 79),
                                       ),
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color: const Color.fromARGB(255, 255, 255, 255),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
@@ -281,16 +351,16 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Container(
                                     height: 30,
-                                    constraints: BoxConstraints(minWidth: 30, maxWidth: 60),                                    padding: EdgeInsets.all(5.0),
+                                    constraints: const BoxConstraints(minWidth: 30, maxWidth: 60),                                    padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1.5,
-                                        color: Color.fromARGB(100, 79, 79, 79),
+                                        color: const Color.fromARGB(100, 79, 79, 79),
                                       ),
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color: const Color.fromARGB(255, 255, 255, 255),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
@@ -311,16 +381,16 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Container(
                                     height: 30,
-                                    constraints: BoxConstraints(minWidth: 50, maxWidth: 110),                                    padding: EdgeInsets.all(5.0),
+                                    constraints: const BoxConstraints(minWidth: 50, maxWidth: 110),                                    padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1.5,
-                                        color: Color.fromARGB(255, 255, 215, 215),
+                                        color: const Color.fromARGB(255, 255, 215, 215),
                                       ),
-                                      color: Color.fromARGB(255, 255, 215, 215),
+                                      color: const Color.fromARGB(255, 255, 215, 215),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
@@ -341,17 +411,17 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Container(
                                     height: 30,
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1.5,
-                                        color: Color.fromARGB(
+                                        color: const Color.fromARGB(
                                             255, 253, 241, 203),
                                       ),
-                                      color: Color.fromARGB(255, 248, 228, 198),
+                                      color: const Color.fromARGB(255, 248, 228, 198),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       '3+',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -376,7 +446,7 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Color.fromARGB(225, 255, 255, 255),
           size: 55,
@@ -387,8 +457,6 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: iconList.length,
         tabBuilder: (int index, bool isActive) {
-          // final color = isActive ? Colors.activeNavigationBarColor : colors
-          //     .notActiveNavigationBarColor;
           return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -399,28 +467,17 @@ class _MainPageState extends State<MainPage> {
                 color: main_theme,
               ),
               const SizedBox(height: 4),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 8),
-              //   child: AutoSizeText(
-              //     "brightness $index",
-              //     maxLines: 1,
-              //     style: TextStyle(color: color),
-              //     group: autoSizeGroup,
-              //   ),
-              // )
             ],
           );
         },
         backgroundColor: Colors.white,
         activeIndex: _bottomNavIndex,
         splashColor: Colors.white,
-        // notchAndCornersAnimation: borderRadiusAnimation,
         splashSpeedInMilliseconds: 300,
         notchSmoothness: NotchSmoothness.defaultEdge,
         gapLocation: GapLocation.center,
         onTap: (index) => setState(() => _bottomNavIndex = index),
-        // hideAnimationController: _hideBottomBarAnimationController,
-        shadow: BoxShadow(
+        shadow: const BoxShadow(
           offset: Offset(0, 1),
           blurRadius: 12,
           spreadRadius: 0.5,
