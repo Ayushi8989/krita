@@ -13,7 +13,7 @@ class userRole extends StatefulWidget {
 
 
 class _userRoleState extends State<userRole> {
-  int count = 0;
+  int roleNo = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -65,34 +65,34 @@ class _userRoleState extends State<userRole> {
               ),
               GestureDetector(
                 onTap: () => setState(() {
-                  count = 1;
+                  roleNo = 1;
                 }),
                 child: userRole_Card(
                   heading: 'Organisation Head',
                   description: 'An NGO which consists of more than 100 active members',
-                  isClicked: count == 1 ? true : false,
+                  isClicked: roleNo == 1 ? true : false,
                 ),
               ),
               GestureDetector(
                 onTap: () => setState(() {
-                  count = 2;
+                  roleNo = 2;
                 }),
                 child: userRole_Card(
                   heading: 'Community Head',
                   description:
                       'A group of people who stepped forward to help the needy.',
-                  isClicked: count == 2 ? true : false,
+                  isClicked: roleNo == 2 ? true : false,
                 ),
               ),
               GestureDetector(
                 onTap: () => setState(() {
-                  count = 3;
+                  roleNo = 3;
                 }),
                 child: userRole_Card(
                   heading: 'Volunteer',
                   description:
                       'Person who is willing to help the needy at any cost.',
-                  isClicked: count == 3 ? true : false,
+                  isClicked: roleNo == 3 ? true : false,
                 ),
               ),
               SizedBox(
@@ -100,7 +100,7 @@ class _userRoleState extends State<userRole> {
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: FloatingActionButton.extended(
                   onPressed: () {
-                    if (count != 0) {
+                    if (roleNo != 0) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
