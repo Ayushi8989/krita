@@ -83,7 +83,7 @@ class PostState extends State<CreatePost> {
 
   Future<String> uploadimage(imagefile) async {
     UploadTask uploadTask =
-        storageref.child('post_$postId.jpg').putFile(imagefile);
+    storageref.child('post_$postId.jpg').putFile(imagefile);
     TaskSnapshot storagesnap = await uploadTask;
     String downloadurl = await storagesnap.ref.getDownloadURL();
     return downloadurl;
@@ -129,11 +129,11 @@ class PostState extends State<CreatePost> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
+    await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark placemark = placemarks[0];
     setState(() {
       locationController.text =
-          "${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}";
+      "${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}";
     });
   }
 
@@ -282,32 +282,32 @@ class PostState extends State<CreatePost> {
                   ),
                   file != null
                       ? Padding(
-                          padding: const EdgeInsets.only(top: 0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.file(
-                              File(file!.path),
-                              fit: BoxFit.cover,
-                              width: 100,
-                              height: 100,
-                            ),
-                          ),
-                        )
+                    padding: const EdgeInsets.only(top: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.file(
+                        File(file!.path),
+                        fit: BoxFit.cover,
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                  )
                       : Container(
-                          margin: const EdgeInsets.only(right: 280.0),
-                          child: DottedBorder(
-                              padding: const EdgeInsets.all(20),
-                              color: const Color.fromRGBO(158, 158, 158, 1),
-                              strokeWidth: 1,
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.add_box_rounded,
-                                  color: Colors.grey,
-                                ),
-                                onPressed: () {
-                                  selectImage(context);
-                                },
-                              ))),
+                      margin: const EdgeInsets.only(right: 280.0),
+                      child: DottedBorder(
+                          padding: const EdgeInsets.all(20),
+                          color: const Color.fromRGBO(158, 158, 158, 1),
+                          strokeWidth: 1,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.add_box_rounded,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              selectImage(context);
+                            },
+                          ))),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   SizedBox(
                     height: 50,
@@ -319,8 +319,8 @@ class PostState extends State<CreatePost> {
                           isUploading
                               ? null
                               : setState(() {
-                                  isUploading = true;
-                                });
+                            isUploading = true;
+                          });
                           // await compressImage();
                           File image = File(file!.path);
                           mediaUrl = await uploadimage(image);
@@ -350,7 +350,7 @@ class PostState extends State<CreatePost> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(main_theme),
+                          MaterialStateProperty.all(main_theme),
                         ),
                         child: const Text('Post')),
                   )
