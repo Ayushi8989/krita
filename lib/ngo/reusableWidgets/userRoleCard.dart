@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:krita/constants.dart';
 
-class userRole_Card extends StatefulWidget {
+class userRole_Card extends StatelessWidget {
   final String heading;
   final String description;
   bool isClicked;
@@ -15,22 +15,17 @@ class userRole_Card extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<userRole_Card> createState() => _userRole_CardState();
-}
-
-class _userRole_CardState extends State<userRole_Card> {
-  @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 20.0),
-      color: widget.isClicked
+      color: isClicked
           ? Color.fromARGB(230, 255, 227, 168)
           : Color.fromARGB(225, 230, 228, 228),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         side: BorderSide(
-          color: widget.isClicked
+          color: isClicked
               ? main_theme
               : Color.fromARGB(225, 230, 228, 228),
           width: 2,
@@ -46,7 +41,7 @@ class _userRole_CardState extends State<userRole_Card> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.heading,
+                heading,
                 style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w600,
@@ -55,7 +50,7 @@ class _userRole_CardState extends State<userRole_Card> {
               ),
               // const SizedBox(height: 3.0,),
               Text(
-                widget.description,
+                description,
                 style: const TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,

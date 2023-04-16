@@ -4,6 +4,7 @@ import 'package:krita/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:krita/ngo/ngo_createPost.dart';
 import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
 import 'package:krita/provider/authentication.dart';
 
@@ -182,7 +183,14 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ngo_createPost(),
+            ),
+          );
+        },
         child: const Icon(
           Icons.add,
           color: Color.fromARGB(225, 255, 255, 255),
