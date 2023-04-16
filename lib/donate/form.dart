@@ -3,7 +3,7 @@ import 'package:krita/constants.dart';
 import 'package:krita/donate/SignIn.dart';
 import 'package:krita/donate/main.dart';
 import 'package:krita/donate/userFeed.dart';
-import 'package:krita/ngo/userRoleCard.dart';
+import 'package:krita/ngo/reusableWidgets/userRoleCard.dart';
 
 class form extends StatefulWidget {
   const form({super.key});
