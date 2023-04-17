@@ -183,7 +183,7 @@ class _ngo_createPostState extends State<ngo_createPost> {
             Divider(),
             Container(
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(12.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -245,7 +245,7 @@ class _ngo_createPostState extends State<ngo_createPost> {
             Divider(),
             Container(
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(12.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
