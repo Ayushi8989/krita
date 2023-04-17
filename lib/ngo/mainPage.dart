@@ -109,6 +109,9 @@ class _MainPageState extends State<MainPage> {
                 onTap: () async {
                   await auth.logout();
                   Navigator.pop(context);
+                  final snackBar = const SnackBar(
+                      content: Text("You're Logged Out"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
               ),
             ],

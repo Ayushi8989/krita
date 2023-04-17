@@ -129,6 +129,9 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                                 builder: (context) => const userRole(),
                               ),
                             );
+                            final snackBar = const SnackBar(
+                              content: Text("You're Logged In"));
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                           label: const Text(
                             'Sign In',
