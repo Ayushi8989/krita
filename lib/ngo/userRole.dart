@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:krita/ngo/mainPage.dart';
-import 'package:krita/ngo/userRoleCard.dart';
+import 'package:krita/ngo/reusableWidgets/userRoleCard.dart';
 
 import 'package:krita/constants.dart';
 
@@ -10,7 +10,6 @@ class userRole extends StatefulWidget {
   @override
   State<userRole> createState() => _userRoleState();
 }
-
 
 class _userRoleState extends State<userRole> {
   int roleNo = 0;
@@ -69,7 +68,8 @@ class _userRoleState extends State<userRole> {
                 }),
                 child: userRole_Card(
                   heading: 'Organisation Head',
-                  description: 'An NGO which consists of more than 100 active members',
+                  description:
+                      'An NGO which consists of more than 100 active members',
                   isClicked: roleNo == 1 ? true : false,
                 ),
               ),
@@ -104,9 +104,7 @@ class _userRoleState extends State<userRole> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MainPage()
-                          )
-                      );
+                              builder: (context) => const MainPage()));
                     }
                   },
                   label: const Text(

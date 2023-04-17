@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-import 'package:krita/ngo/formInput_Card.dart';
+import 'package:krita/ngo/reusableWidgets/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signup.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
@@ -129,6 +129,9 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                                 builder: (context) => const userRole(),
                               ),
                             );
+                            final snackBar = const SnackBar(
+                              content: Text("You're Logged In"));
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                           label: const Text(
                             'Sign In',
@@ -150,8 +153,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           TextButton(
-                              onPressed: () {
-                              },
+                              onPressed: () {},
                               child: Logo(Logos.facebook_logo)),
                           TextButton(
                               onPressed: () async {

@@ -5,6 +5,7 @@ class InputCard extends StatefulWidget {
   final Widget child;
 
   InputCard({key, required this.child}) : super(key: key);
+
   // @override
   State<InputCard> createState() => _InputCardState();
 }

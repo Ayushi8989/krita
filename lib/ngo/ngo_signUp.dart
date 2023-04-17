@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 // import 'package:krita/controller/signup_controller.dart';
-import 'package:krita/ngo/formInput_Card.dart';
+import 'package:krita/ngo/reusableWidgets/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signIn.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
 
 class Ngo_SignUpPage extends StatefulWidget {
   const Ngo_SignUpPage({super.key});
+
   static final String id = 'signup';
 
   @override
