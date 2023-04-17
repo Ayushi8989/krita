@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
 import 'package:krita/ngo/reusableWidgets/capsuleCard.dart';
@@ -146,6 +147,42 @@ class _ngo_createPostState extends State<ngo_createPost> {
             Divider(),
             Container(
               width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Add Image',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 16.0,),
+                  TextButton(
+                    onPressed: () {},
+                    child: DottedBorder(
+                      borderType: BorderType.RRect,
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        // decoration: BoxDecoration(
+                        //   border:
+                        // )
+                        child: Icon(
+                          Icons.camera_alt,
+                          size: 40,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(),
+            Container(
+              width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,7 +239,6 @@ class _ngo_createPostState extends State<ngo_createPost> {
                       )
                     ],
                   ),
-                  SizedBox(height: 16.0,),
                 ],
               ),
             ),
@@ -233,6 +269,50 @@ class _ngo_createPostState extends State<ngo_createPost> {
                     },
                   ),
                 ],
+              ),
+            ),
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                // height: 50,
+                width: MediaQuery.of(context).size.width * 0.5,
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(225, 230, 228, 228),
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    labelText: 'Description',
+                    labelStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                  cursorColor: Colors.grey,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+              child: Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+
+                  },
+                  label: const Text(
+                    'Post',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  backgroundColor: main_theme,
+                ),
               ),
             ),
           ],
