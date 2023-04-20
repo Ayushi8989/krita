@@ -4,6 +4,8 @@ import 'package:krita/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:krita/ngo/ngo_createPost.dart';
+import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
 import 'package:krita/provider/authentication.dart';
 
 class MainPage extends StatefulWidget {
@@ -104,9 +106,12 @@ class _MainPageState extends State<MainPage> {
                   color: main_theme,
                 ),
                 title: const Text('Log Out'),
-                onTap: () async{
+                onTap: () async {
                   await auth.logout();
                   Navigator.pop(context);
+                  final snackBar = const SnackBar(
+                      content: Text("You're Logged Out"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
               ),
             ],
@@ -118,324 +123,60 @@ class _MainPageState extends State<MainPage> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        color: Color.fromARGB(127, 227, 227, 227),
-                      ),
-                      // child: Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        // controller: _searchController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Search...',
-                          // suffixIcon: IconButton(
-                          //   onPressed: () {},
-                          //   icon: Icon(Icons.clear),
-                          // ),
-                          prefixIcon: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
                           ),
+                          color: Color.fromARGB(127, 227, 227, 227),
                         ),
-                      )),
-                  const Icon(
-                    Bootstrap.sliders,
-                    color: main_theme,
-                  ),
-                ],
+                        // child: Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          // controller: _searchController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search...',
+                            // suffixIcon: IconButton(
+                            //   onPressed: () {},
+                            //   icon: Icon(Icons.clear),
+                            // ),
+                            prefixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.search),
+                            ),
+                          ),
+                        )),
+                    const Icon(
+                      Bootstrap.sliders,
+                      color: main_theme,
+                    ),
+                  ],
+                ),
               ),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.only(top: 20.0),
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      padding: new EdgeInsets.all(4.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        elevation: 5,
-                        child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 6.0, horizontal: 12.0),
-                                        child: ProfilePicture(
-                                          name: ' ',
-                                          radius: 20,
-                                          fontsize: 21,
-                                          random: true,
-                                          count: 2,
-                                          img:
-                                          'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        // crossAxisAlignment: CrossAxisAlignment.baseline,
-                                        children: [
-                                          Text(
-                                            'Dhakeshwari',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color.fromARGB(
-                                                    255, 35, 35, 35)),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.verified,
-                                                color: Colors.blue,
-                                              ),
-                                              Text(
-                                                'Verified',
-                                                style: TextStyle(
-                                                  color: Colors.blue,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding:
-                                    EdgeInsets.symmetric(horizontal: 12.0),
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          Icons.more_horiz,
-                                          color: Color.fromARGB(
-                                              255, 154, 154, 154),
-                                        ),
-                                        Text(
-                                          '3 min',
-                                          style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 154, 154, 154),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.1,
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0,
-                                    color: const Color.fromARGB(255, 131, 131, 131)),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 20.0),
-                              child: Text(
-                                'We have an excess of 50 meals and want to donate them',
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(195, 79, 79, 79),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Wrap(
-                                direction: Axis.horizontal,
-                                alignment: WrapAlignment.start,
-                                spacing: 8.0,
-                                runSpacing: 10.0,
-                                children: [
-                                  Container(
-                                    height: 30,
-                                    // width: 70,
-                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(255, 242, 84, 84),
-                                      ),
-                                      color: const Color.fromARGB(255, 255, 215, 215),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: const Text(
-                                      'Non-Veg',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color.fromARGB(255, 242, 84, 84),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    // width: 45,
-                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(255, 76, 126, 58),
-                                      ),
-                                      color: const Color.fromARGB(255, 221, 253, 196),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: const Text(
-                                      'Veg',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color.fromARGB(255, 76, 126, 58),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    constraints: const BoxConstraints(minWidth: 50, maxWidth: 100),                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(100, 79, 79, 79),
-                                      ),
-                                      color: const Color.fromARGB(255, 255, 255, 255),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(
-                                          Bootstrap.bell,
-                                          size: 15.0,
-                                          color: Colors.amber,
-                                        ),
-                                        Text(
-                                          '50 meals',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Color.fromARGB(150, 79, 79, 79),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    constraints: const BoxConstraints(minWidth: 30, maxWidth: 60),                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(100, 79, 79, 79),
-                                      ),
-                                      color: const Color.fromARGB(255, 255, 255, 255),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(
-                                          Bootstrap.geo_alt,
-                                          size: 15.0,
-                                          color: Color.fromARGB(255, 242, 84, 84),
-                                        ),
-                                        Text(
-                                          '2km',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Color.fromARGB(150, 79, 79, 79),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    constraints: const BoxConstraints(minWidth: 50, maxWidth: 110),                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(255, 255, 215, 215),
-                                      ),
-                                      color: const Color.fromARGB(255, 255, 215, 215),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(
-                                          Bootstrap.clock,
-                                          size: 15.0,
-                                          color: Color.fromARGB(255, 242, 84, 84),
-                                        ),
-                                        Text(
-                                          'Exp 20 min',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Color.fromARGB(255, 242, 84, 84),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(
-                                            255, 253, 241, 203),
-                                      ),
-                                      color: const Color.fromARGB(255, 248, 228, 198),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: const Text(
-                                      '3+',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.amber,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  children: const [
+                    donationPostDetails(
+                      doner_profile_picture: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
+                      doner_name: 'Dhakeshwari',
+                      post_time: '3 min',
+                      title: 'We have an excess of 50 meals and want to donate them',
+                    ),
+                    donationPostDetails(
+                      doner_profile_picture: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
+                      doner_name: 'Arsalan',
+                      post_time: '5 min',
+                      title: 'We have an excess of 100 meals and want to donate them',
                     ),
                   ],
                 ),
@@ -445,7 +186,14 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ngo_createPost(),
+            ),
+          );
+        },
         child: const Icon(
           Icons.add,
           color: Color.fromARGB(225, 255, 255, 255),
@@ -479,8 +227,8 @@ class _MainPageState extends State<MainPage> {
         onTap: (index) => setState(() => _bottomNavIndex = index),
         shadow: const BoxShadow(
           offset: Offset(0, 1),
-          blurRadius: 12,
-          spreadRadius: 0.5,
+          blurRadius: 4,
+          spreadRadius: 0.3,
           color: Color.fromARGB(225, 175, 175, 175),
         ),
       ),
