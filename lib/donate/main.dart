@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:krita/constants.dart';
 
 User? userr;
 String? posttime;
@@ -47,6 +48,15 @@ class _MainPageState extends State<MainPage> {
     minutes = timeLeft.inMinutes % 60;
   }
 
+  Widget searchbar() {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.02,
+      decoration: BoxDecoration(
+        color: main_theme,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +66,7 @@ class _MainPageState extends State<MainPage> {
           final Map<String, dynamic> user = _users[index];
           posttime = user['date'];
           time();
+          searchbar();
           return Container(
               margin: const EdgeInsets.all(40),
               padding: const EdgeInsets.all(20),

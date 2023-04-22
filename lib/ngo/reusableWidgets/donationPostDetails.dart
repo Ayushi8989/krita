@@ -8,8 +8,13 @@ class donationPostDetails extends StatefulWidget {
   final String post_time;
   final String title;
 
-
-  const donationPostDetails({key, this.doner_profile_picture, required this.doner_name, required this.post_time, required this.title}) : super(key: key);
+  const donationPostDetails(
+      {key,
+      this.doner_profile_picture,
+      required this.doner_name,
+      required this.post_time,
+      required this.title})
+      : super(key: key);
 
   @override
   State<donationPostDetails> createState() => _donationPostDetailsState();
@@ -45,8 +50,7 @@ class _donationPostDetailsState extends State<donationPostDetails> {
                           fontsize: 21,
                           random: true,
                           count: 2,
-                          img:
-                              widget.doner_profile_picture,
+                          img: widget.doner_profile_picture,
                         ),
                       ),
                       Column(
@@ -184,7 +188,7 @@ class _donationPostDetailsState extends State<donationPostDetails> {
                       color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Icon(
@@ -216,7 +220,7 @@ class _donationPostDetailsState extends State<donationPostDetails> {
                       color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Icon(
@@ -248,7 +252,7 @@ class _donationPostDetailsState extends State<donationPostDetails> {
                       color: const Color.fromARGB(255, 255, 215, 215),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Icon(
