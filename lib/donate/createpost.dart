@@ -24,6 +24,7 @@ class CreatePost extends StatefulWidget {
 class PostState extends State<CreatePost> {
   bool isUploading = false;
   bool status = false;
+  bool isLoading = false;
   String postId = const Uuid().v4();
   XFile? file;
   TextEditingController locationController = TextEditingController();
@@ -31,6 +32,7 @@ class PostState extends State<CreatePost> {
   TextEditingController timeController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+  TextEditingController vegnController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
   fromCamera() async {
@@ -83,7 +85,7 @@ class PostState extends State<CreatePost> {
 
   Future<String> uploadimage(imagefile) async {
     UploadTask uploadTask =
-    storageref.child('post_$postId.jpg').putFile(imagefile);
+        storageref.child('post_$postId.jpg').putFile(imagefile);
     TaskSnapshot storagesnap = await uploadTask;
     String downloadurl = await storagesnap.ref.getDownloadURL();
     return downloadurl;
@@ -101,8 +103,15 @@ class PostState extends State<CreatePost> {
     return downloadURL;
   }
 
-  Future<void> userSetup(User? user, String location, String foodItem,
-      String time, String date, String quantity, String? mediaurl) async {
+  Future<void> userSetup(
+      User? user,
+      String location,
+      String foodItem,
+      String time,
+      String date,
+      String quantity,
+      String? mediaurl,
+      String vegn) async {
     User? user = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance
         .collection('Users')
@@ -119,6 +128,7 @@ class PostState extends State<CreatePost> {
       "date": date,
       "quantity": quantity,
       "mediaurl": mediaurl,
+      "veg/nonveg": vegn,
     });
     setState(() {
       status = true;
@@ -126,14 +136,26 @@ class PostState extends State<CreatePost> {
   }
 
   Future<void> getUserCurrentLocation() async {
+    setState(() {
+      isLoading = true;
+    });
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     List<Placemark> placemarks =
-    await placemarkFromCoordinates(position.latitude, position.longitude);
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark placemark = placemarks[0];
     setState(() {
       locationController.text =
-      "${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}";
+          "${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}";
+    });
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -202,12 +224,14 @@ class PostState extends State<CreatePost> {
                         color: Colors.grey,
                       ),
                     ),
-                    trailing: IconButton(
-                        icon: const Icon(
-                          Icons.pin_drop_outlined,
-                          color: main_theme,
-                        ),
-                        onPressed: getUserCurrentLocation),
+                    trailing: isLoading
+                        ? CircularProgressIndicator()
+                        : IconButton(
+                            icon: const Icon(
+                              Icons.pin_drop_outlined,
+                              color: main_theme,
+                            ),
+                            onPressed: getUserCurrentLocation),
                   ),
                   const Divider(),
                   Container(
@@ -269,6 +293,21 @@ class PostState extends State<CreatePost> {
                       ),
                     ),
                   ),
+                  Divider(),
+                  Container(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: TextField(
+                      controller: vegnController,
+                      decoration: const InputDecoration(
+                        hintText: "Veg/Non-Veg",
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
                   const Divider(),
                   const SizedBox(
                     height: 30,
@@ -282,32 +321,32 @@ class PostState extends State<CreatePost> {
                   ),
                   file != null
                       ? Padding(
-                    padding: const EdgeInsets.only(top: 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.file(
-                        File(file!.path),
-                        fit: BoxFit.cover,
-                        width: 100,
-                        height: 100,
-                      ),
-                    ),
-                  )
-                      : Container(
-                      margin: const EdgeInsets.only(right: 280.0),
-                      child: DottedBorder(
-                          padding: const EdgeInsets.all(20),
-                          color: const Color.fromRGBO(158, 158, 158, 1),
-                          strokeWidth: 1,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.add_box_rounded,
-                              color: Colors.grey,
+                          padding: const EdgeInsets.only(top: 0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.file(
+                              File(file!.path),
+                              fit: BoxFit.cover,
+                              width: 100,
+                              height: 100,
                             ),
-                            onPressed: () {
-                              selectImage(context);
-                            },
-                          ))),
+                          ),
+                        )
+                      : Container(
+                          margin: const EdgeInsets.only(right: 280.0),
+                          child: DottedBorder(
+                              padding: const EdgeInsets.all(20),
+                              color: const Color.fromRGBO(158, 158, 158, 1),
+                              strokeWidth: 1,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.add_box_rounded,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  selectImage(context);
+                                },
+                              ))),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   SizedBox(
                     height: 50,
@@ -319,8 +358,8 @@ class PostState extends State<CreatePost> {
                           isUploading
                               ? null
                               : setState(() {
-                            isUploading = true;
-                          });
+                                  isUploading = true;
+                                });
                           // await compressImage();
                           File image = File(file!.path);
                           mediaUrl = await uploadimage(image);
@@ -329,13 +368,15 @@ class PostState extends State<CreatePost> {
                           String time = timeController.text;
                           String date = dateController.text;
                           String quantity = quantityController.text;
+                          String vegn = vegnController.text;
                           userSetup(user, location, foodItem, time, date,
-                              quantity, mediaUrl);
+                              quantity, mediaUrl, vegn);
                           locationController.clear();
                           foodItemController.clear();
                           timeController.clear();
                           dateController.clear();
                           quantityController.clear();
+                          vegnController.clear();
                           setState(() {
                             file = null;
                             isUploading = false;
@@ -350,7 +391,7 @@ class PostState extends State<CreatePost> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all(main_theme),
+                              MaterialStateProperty.all(main_theme),
                         ),
                         child: const Text('Post')),
                   )

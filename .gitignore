@@ -1,3 +1,5 @@
+android/app/src/main/AndroidManifest.xml
+
 # Miscellaneous
 *.class
 *.log
@@ -38,7 +40,7 @@ pubspec.lock
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
-
+/android/src/main/AnodroidManifest.xml
 # iOS/XCode related
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
@@ -71,3 +73,5 @@ pubspec.lock
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+
