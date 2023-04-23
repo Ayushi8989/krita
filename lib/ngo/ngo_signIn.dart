@@ -131,8 +131,9 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: FloatingActionButton.extended(
-                          onPressed: () async{
-                            String? success = await auth.signInWithEmail(emailController.text, passwordController.text);
+                          onPressed: () async {
+                            String? success = await auth.signInWithEmail(
+                                emailController.text, passwordController.text);
                             if (success != null) {
                               Navigator.push(
                                 context,
@@ -142,10 +143,9 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                               );
                               final snackBar = const SnackBar(
                                   content: Text("You're Logged In"));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  snackBar);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                             }
-
                           },
                           label: const Text(
                             'Sign In',
@@ -174,7 +174,8 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                                 User? user = await auth.signInWithGoogle();
                                 // print(user!.email);
                                 if (user != null) {
-                                  bool isUserRegistered = await auth.isUserRegistered(user.uid);
+                                  bool isUserRegistered =
+                                      await auth.isUserRegistered(user.uid);
                                   if (isUserRegistered) {
                                     Navigator.push(
                                       context,
@@ -192,8 +193,8 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                                   }
                                   final snackBar = const SnackBar(
                                       content: Text("You're Logged In"));
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      snackBar);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                 }
                               },
                               child: Logo(Logos.google)),
