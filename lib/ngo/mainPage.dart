@@ -10,7 +10,9 @@ import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
 import 'package:krita/provider/authentication.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+   String ? email;
+
+   MainPage({key, this.email}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -68,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 accountEmail: Text(
-                  "ame123@gmail.com",
+                  "email",
                 ),
                 currentAccountPicture: ProfilePicture(
                   name: 'Ame',

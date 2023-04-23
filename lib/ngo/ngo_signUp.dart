@@ -7,6 +7,8 @@ import 'package:krita/ngo/ngo_signIn.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
 
+import '../provider/authentication.dart';
+
 class Ngo_SignUpPage extends StatefulWidget {
   const Ngo_SignUpPage({super.key});
 
@@ -17,10 +19,17 @@ class Ngo_SignUpPage extends StatefulWidget {
 }
 
 class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
-  // final controller =  Get.put(SIgnUpController());
+
+  final myController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  Authentication auth = Authentication();
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bg_color,
@@ -55,6 +64,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
             //SignUp Container starts here
             Container(
               width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.67,
               margin: const EdgeInsets.only(top: 35),
               decoration: const BoxDecoration(
                 color: bg_color,
@@ -94,7 +104,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                             height: 70,
                             child: InputCard(
                               child: TextFormField(
-                                // controller: controller.name,
+                                controller: nameController,
                                 decoration: const InputDecoration(
                                   hintText: 'Enter name',
                                   border: InputBorder.none,
@@ -103,6 +113,12 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                                     fontSize: 14,
                                   ),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your name';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -110,7 +126,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                             height: 70,
                             child: InputCard(
                               child: TextFormField(
-                                // controller: controller.email,
+                                controller: emailController,
                                 decoration: const InputDecoration(
                                   hintText: 'Enter email id',
                                   border: InputBorder.none,
@@ -119,6 +135,12 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                                     fontSize: 14,
                                   ),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your email';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -126,7 +148,8 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                             height: 70,
                             child: InputCard(
                               child: TextFormField(
-                                // controller: controller.password,
+                                controller: passwordController,
+                                obscureText: true,
                                 decoration: const InputDecoration(
                                   hintText: 'Enter password',
                                   border: InputBorder.none,
@@ -135,6 +158,12 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                                     fontSize: 14,
                                   ),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -142,6 +171,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                             height: 70,
                             child: InputCard(
                               child: TextFormField(
+                                obscureText: true,
                                 decoration: const InputDecoration(
                                   hintText: 'Confirm Password',
                                   border: InputBorder.none,
@@ -150,6 +180,12 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                                     fontSize: 14,
                                   ),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter correct password';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -161,17 +197,25 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: FloatingActionButton.extended(
-                      onPressed: () {
-                        // if(_formKey.currentState!.validate()) {
-                        //   SIgnUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
-                        // }
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const userRole(),
-                          ),
-                        );
+                      onPressed: () async{
+                        String? success = await auth.signUpWithEmail(nameController.text, emailController.text, passwordController.text);
+                        if(_formKey.currentState!.validate()) {
+                          //   SIgnUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                          // }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const userRole(),
+                            ),
+                          );
+                        }
+                        else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Please enter all the details'))
+                          );
+                        }
                       },
+
                       label: const Text(
                         'Sign Up',
                         style: TextStyle(
