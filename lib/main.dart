@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:krita/donate/SignUp.dart';
 import 'package:krita/ngo/ngo_signup.dart';
-
 import 'package:krita/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:async';
-
 import 'firebase_options.dart';
 import 'homePage.dart';
 import 'donate/SignIn.dart';
 import 'ngo/ngo_signin.dart';
 import 'constants.dart';
 import 'package:web_socket_channel/io.dart';
-
 
 //const color = Color.fromARGB(255, 251, 167, 0);
 
@@ -28,18 +25,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-    create: (context) => Authentication(),
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Colors.yellow[700],
-          secondary: Colors.yellow.shade700,
+        create: (context) => Authentication(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: Colors.yellow[700],
+              secondary: Colors.yellow.shade700,
+            ),
+          ),
+          home: SplashScreen(),
         ),
-      ),
-      home: SplashScreen(),
-    ),
-  );
+      );
 }
 
 class Routes extends StatefulWidget {
@@ -83,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         const Duration(seconds: 3),
-            () => Navigator.pushReplacement(context,
+        () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const HomePage())));
   }
 
