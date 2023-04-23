@@ -14,7 +14,8 @@ class capsule_Card extends StatelessWidget {
       // width: 70,
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: isClicked ? main_theme : Color.fromARGB(225, 230, 228, 228),                          borderRadius: BorderRadius.circular(15),
+        color: isClicked ? main_theme : Color.fromARGB(225, 230, 228, 228),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Text(
         meal_type,

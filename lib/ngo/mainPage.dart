@@ -6,6 +6,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:krita/ngo/ngo_createPost.dart';
+import 'package:krita/ngo/ngo_userProfile.dart';
 import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
 import 'package:krita/provider/authentication.dart';
 
@@ -81,6 +82,21 @@ class _MainPageState extends State<MainPage> {
                   random: true,
                   count: 2,
                 ),
+              ),
+              ListTile(
+                leading: const Icon(
+                  Bootstrap.person_fill_gear,
+                  color: main_theme,
+                ),
+                title: const Text('Profile'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ngo_userProfile(),
+                    ),
+                  );
+                },
               ),
               ListTile(
                 leading: const Icon(
