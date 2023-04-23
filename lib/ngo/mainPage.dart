@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
 
@@ -7,6 +8,10 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:krita/ngo/ngo_createPost.dart';
 import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
 import 'package:krita/provider/authentication.dart';
+
+User? userr;
+String? posttime;
+int? days, time, hrs, minutes;
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -109,8 +114,8 @@ class _MainPageState extends State<MainPage> {
                 onTap: () async {
                   await auth.logout();
                   Navigator.pop(context);
-                  final snackBar = const SnackBar(
-                      content: Text("You're Logged Out"));
+                  final snackBar =
+                      const SnackBar(content: Text("You're Logged Out"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
               ),
@@ -167,16 +172,20 @@ class _MainPageState extends State<MainPage> {
                   padding: const EdgeInsets.only(top: 20.0),
                   children: const [
                     donationPostDetails(
-                      doner_profile_picture: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
+                      doner_profile_picture:
+                          'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
                       doner_name: 'Dhakeshwari',
                       post_time: '3 min',
-                      title: 'We have an excess of 50 meals and want to donate them',
+                      title:
+                          'We have an excess of 50 meals and want to donate them',
                     ),
                     donationPostDetails(
-                      doner_profile_picture: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
+                      doner_profile_picture:
+                          'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80',
                       doner_name: 'Arsalan',
                       post_time: '5 min',
-                      title: 'We have an excess of 100 meals and want to donate them',
+                      title:
+                          'We have an excess of 100 meals and want to donate them',
                     ),
                   ],
                 ),

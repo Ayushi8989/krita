@@ -24,6 +24,7 @@ class CreatePost extends StatefulWidget {
 class PostState extends State<CreatePost> {
   bool isUploading = false;
   bool status = false;
+  bool isLoading = false;
   String postId = const Uuid().v4();
   XFile? file;
   TextEditingController locationController = TextEditingController();
@@ -31,6 +32,7 @@ class PostState extends State<CreatePost> {
   TextEditingController timeController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+  TextEditingController vegnController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
   fromCamera() async {
@@ -101,8 +103,15 @@ class PostState extends State<CreatePost> {
     return downloadURL;
   }
 
-  Future<void> userSetup(User? user, String location, String foodItem,
-      String time, String date, String quantity, String? mediaurl) async {
+  Future<void> userSetup(
+      User? user,
+      String location,
+      String foodItem,
+      String time,
+      String date,
+      String quantity,
+      String? mediaurl,
+      String vegn) async {
     User? user = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance
         .collection('Users')
@@ -119,6 +128,7 @@ class PostState extends State<CreatePost> {
       "date": date,
       "quantity": quantity,
       "mediaurl": mediaurl,
+      "veg/nonveg": vegn,
     });
     setState(() {
       status = true;
@@ -126,6 +136,9 @@ class PostState extends State<CreatePost> {
   }
 
   Future<void> getUserCurrentLocation() async {
+    setState(() {
+      isLoading = true;
+    });
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
@@ -140,6 +153,9 @@ class PostState extends State<CreatePost> {
     setState(() {
       locationController.text =
           "${placemark.street}, ${placemark.locality}, ${placemark.administrativeArea}, ${placemark.country}";
+    });
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -208,12 +224,14 @@ class PostState extends State<CreatePost> {
                         color: Colors.grey,
                       ),
                     ),
-                    trailing: IconButton(
-                        icon: const Icon(
-                          Icons.pin_drop_outlined,
-                          color: main_theme,
-                        ),
-                        onPressed: getUserCurrentLocation),
+                    trailing: isLoading
+                        ? CircularProgressIndicator()
+                        : IconButton(
+                            icon: const Icon(
+                              Icons.pin_drop_outlined,
+                              color: main_theme,
+                            ),
+                            onPressed: getUserCurrentLocation),
                   ),
                   const Divider(),
                   Container(
@@ -267,6 +285,21 @@ class PostState extends State<CreatePost> {
                       controller: quantityController,
                       decoration: const InputDecoration(
                         hintText: "Quantity",
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: TextField(
+                      controller: vegnController,
+                      decoration: const InputDecoration(
+                        hintText: "Veg/Non-Veg",
                         border: InputBorder.none,
                       ),
                       style: const TextStyle(
@@ -335,13 +368,15 @@ class PostState extends State<CreatePost> {
                           String time = timeController.text;
                           String date = dateController.text;
                           String quantity = quantityController.text;
+                          String vegn = vegnController.text;
                           userSetup(user, location, foodItem, time, date,
-                              quantity, mediaUrl);
+                              quantity, mediaUrl, vegn);
                           locationController.clear();
                           foodItemController.clear();
                           timeController.clear();
                           dateController.clear();
                           quantityController.clear();
+                          vegnController.clear();
                           setState(() {
                             file = null;
                             isUploading = false;
