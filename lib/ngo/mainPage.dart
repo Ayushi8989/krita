@@ -10,14 +10,16 @@ import 'package:krita/ngo/ngo_userProfile.dart';
 import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
 import 'package:krita/provider/authentication.dart';
 
+import '../homePage.dart';
+
 User? userr;
 String? posttime;
 int? days, time, hrs, minutes;
 
 class MainPage extends StatefulWidget {
-   String ? email;
+  String? email;
 
-   MainPage({key, this.email}) : super(key: key);
+  MainPage({key, this.email}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -131,7 +133,9 @@ class _MainPageState extends State<MainPage> {
                 title: const Text('Log Out'),
                 onTap: () async {
                   await auth.logout();
-                  Navigator.pop(context);
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (BuildContext) => HomePage()),
+                      (route) => false);
                   final snackBar =
                       const SnackBar(content: Text("You're Logged Out"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
