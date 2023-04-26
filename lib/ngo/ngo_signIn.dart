@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:krita/donate/main.dart';
 
 import 'package:krita/ngo/reusableWidgets/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signup.dart';
@@ -16,6 +17,11 @@ class Ngo_SignInPage extends StatefulWidget {
 }
 
 class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
+  final myController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   Authentication auth = Authentication();
 
   @override
@@ -89,6 +95,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                               height: 70,
                               child: InputCard(
                                 child: TextFormField(
+                                  controller: emailController,
                                   decoration: const InputDecoration(
                                     hintText: 'User Name',
                                     border: InputBorder.none,
@@ -104,6 +111,8 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                               height: 70,
                               child: InputCard(
                                 child: TextFormField(
+                                  controller: passwordController,
+                                  obscureText: true,
                                   decoration: const InputDecoration(
                                     hintText: 'Password',
                                     border: InputBorder.none,
@@ -122,16 +131,21 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: FloatingActionButton.extended(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const userRole(),
-                              ),
-                            );
-                            final snackBar = const SnackBar(
-                              content: Text("You're Logged In"));
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          onPressed: () async {
+                            String? success = await auth.signInWithEmail(
+                                emailController.text, passwordController.text);
+                            if (success != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const userRole(),
+                                ),
+                              );
+                              final snackBar = const SnackBar(
+                                  content: Text("You're Logged In"));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
                           },
                           label: const Text(
                             'Sign In',
@@ -157,8 +171,31 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                               child: Logo(Logos.facebook_logo)),
                           TextButton(
                               onPressed: () async {
-                                var user = await auth.signInWithGoogle();
-                                print(user!.email);
+                                User? user = await auth.signInWithGoogle();
+                                // print(user!.email);
+                                if (user != null) {
+                                  bool isUserRegistered =
+                                      await auth.isUserRegistered(user.uid);
+                                  if (isUserRegistered) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MainPage(),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const userRole(),
+                                      ),
+                                    );
+                                  }
+                                  final snackBar = const SnackBar(
+                                      content: Text("You're Logged In"));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
                               },
                               child: Logo(Logos.google)),
                           TextButton(

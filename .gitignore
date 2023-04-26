@@ -20,7 +20,6 @@ android/app/src/main/AndroidManifest.xml
 # Visual Studio Code related
 .vscode/
 
-
 # Flutter/Dart/Pub related
 **/doc/api/
 pubspec.lock
