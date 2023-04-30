@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:krita/constants.dart';
+import 'package:krita/donate/createpost.dart';
 
 User? userr;
 String? posttime;
@@ -74,7 +75,7 @@ class _MainPageState extends State<MainPage> {
   bool veg = false;
 
   bool vegnonveg() {
-    if (type == 'veg') {
+    if (type == 'veg' || type == 'Veg') {
       return true;
     }
     return false;
@@ -84,18 +85,33 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(
-          Icons.search,
-          color: Colors.black,
-        ),
         backgroundColor: Colors.white,
         //removes back button from appbar.
         automaticallyImplyLeading: false,
-        title: TextField(
-          textAlign: TextAlign.start,
-          controller: _searchController,
-          decoration: const InputDecoration(
-              hintText: 'Search', border: InputBorder.none),
+        flexibleSpace: Container(
+          width: 100,
+          height: 40.0,
+          margin:
+              const EdgeInsets.only(left: 40, right: 100, top: 8, bottom: 8),
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(73, 158, 158, 158),
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              // TextField(
+
+              //   textAlign: TextAlign.start,
+              //   controller: _searchController,
+              //   decoration: const InputDecoration(
+              //       hintText: 'Search', border: InputBorder.none),
+              // ),
+            ],
+          ),
         ),
         actions: [
           IconButton(
@@ -172,6 +188,15 @@ class _MainPageState extends State<MainPage> {
                   // width: MediaQuery.of(context).size.width * 0.7,
                 )),
                 const Padding(padding: EdgeInsets.only(top: 15)),
+                Text(
+                  user['msg'],
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 94, 91, 91),
+                      fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
                 Column(
                   children: [
                     Row(
@@ -204,36 +229,6 @@ class _MainPageState extends State<MainPage> {
                         const SizedBox(
                           width: 10.0,
                         ),
-                        Container(
-                          height: 30,
-                          padding: const EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1.5,
-                              color: const Color.fromARGB(255, 255, 215, 215),
-                            ),
-                            color: const Color.fromARGB(255, 255, 215, 215),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const Icon(
-                                Bootstrap.clock,
-                                size: 15.0,
-                                color: Color.fromARGB(255, 242, 84, 84),
-                              ),
-                              time(),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
                         vegnonveg()
                             ? Container(
                                 height: 30,
@@ -281,6 +276,59 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                               ),
+                        Container(
+                          height: 30,
+                          padding: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.only(right: 10, left: 10),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.5,
+                              color: const Color.fromARGB(100, 79, 79, 79),
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                size: 15.0,
+                                color: Color.fromARGB(255, 218, 242, 84),
+                              ),
+                              Text("2km")
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 30,
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.5,
+                              color: const Color.fromARGB(255, 255, 215, 215),
+                            ),
+                            color: const Color.fromARGB(255, 255, 215, 215),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Icon(
+                                Bootstrap.clock,
+                                size: 15.0,
+                                color: Color.fromARGB(255, 242, 84, 84),
+                              ),
+                              time(),
+                            ],
+                          ),
+                        ),
                       ],
                     )
                   ],
