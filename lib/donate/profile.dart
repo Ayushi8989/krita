@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
 
+import '../provider/authentication.dart';
+
 class profile extends StatefulWidget {
   const profile({Key? key, required User user})
       : _user = user,
@@ -20,6 +22,8 @@ class profileState extends State<profile> {
 
   @override
   Widget build(BuildContext context) {
+    bool isSigningOut = false;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Krita',
@@ -30,11 +34,10 @@ class profileState extends State<profile> {
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                color: main_theme,
                 iconSize: 30,
                 //replace with our own icon data.
               ),
-              backgroundColor: Colors.transparent,
+              backgroundColor: main_theme,
               elevation: 0,
             ),
             backgroundColor: bg_color,
@@ -99,6 +102,126 @@ class profileState extends State<profile> {
                       )
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 40.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: const [
+                        Text(
+                          "20",
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "Donations",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 59, 58, 58)),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: const [
+                        Text(
+                          "11",
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "Referrals",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 59, 58, 58)),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: const [
+                        Text(
+                          "16",
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "Credits",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 59, 58, 58)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(height: 40.0),
+                Divider(),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Send a Refferal",
+                    style: TextStyle(
+                      color: Color.fromARGB(214, 53, 51, 51),
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+                Divider(),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "How to use credits?",
+                    style: TextStyle(
+                      color: Color.fromARGB(214, 53, 51, 51),
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+                Divider(),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Help",
+                    style: TextStyle(
+                      color: Color.fromARGB(214, 53, 51, 51),
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+                Divider(),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "FAQs",
+                    style: TextStyle(
+                      color: Color.fromARGB(214, 53, 51, 51),
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 60.0,
+                ),
+                FloatingActionButton.extended(
+                  onPressed: () async {
+                    setState(() {
+                      isSigningOut = true;
+                    });
+                    await FirebaseAuth.instance.signOut();
+                    setState(() {
+                      isSigningOut = false;
+                    });
+                  },
+                  label: const Text(
+                    "Sign out",
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  backgroundColor: main_theme,
                 )
               ],
             )));

@@ -85,6 +85,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         //removes back button from appbar.
         automaticallyImplyLeading: false,
