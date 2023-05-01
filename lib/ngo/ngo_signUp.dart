@@ -6,8 +6,7 @@ import 'package:krita/ngo/reusableWidgets/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signIn.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
-
-import '../backend/ngo/authentication.dart';
+import 'package:krita/provider/authentication.dart';
 
 class Ngo_SignUpPage extends StatefulWidget {
   const Ngo_SignUpPage({super.key});

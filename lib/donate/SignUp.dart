@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:krita/donate/userFeed.dart';
+import '../constants.dart';
+import '../ngo/reusableWidgets/formInput_Card.dart';
+import '../provider/authentication.dart';
 import 'SignIn.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
@@ -10,259 +14,249 @@ class SignUpPage extends StatefulWidget {
   _State createState() => _State();
 }
 
+Authentication auth = Authentication();
+final myController = TextEditingController();
+final _formKey = GlobalKey<FormState>();
+TextEditingController nameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+
 class _State extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Krita',
-        home: Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                color: color,
-                iconSize: 30,
-                //replace with our own icon data.
+      debugShowCheckedModeBanner: false,
+      title: 'Krita',
+      home: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
+            color: color,
+            iconSize: 30,
+            //replace with our own icon data.
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        backgroundColor: Colors.white,
+        // resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 30),
+                child: const Text(
+                  'Krita',
+                  style: TextStyle(
+                    fontFamily: 'SAMAN',
+                    color: main_theme,
+                    fontSize: 105,
+                  ),
+                ),
               ),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-            backgroundColor: Colors.white,
-            // resizeToAvoidBottomInset: false,
-            body: SingleChildScrollView(
-              child: Center(
-                  child: Container(
-                      // height: MediaQuery.of(context).size.height,
-                      constraints: const BoxConstraints(
-                        maxHeight: double.infinity,
+
+              //SignUp Container starts here
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.67,
+                margin: const EdgeInsets.only(top: 35),
+                decoration: const BoxDecoration(
+                  color: bg_color,
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(40.0), bottom: Radius.circular(0.0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(34, 0, 0, 0),
+                      offset: Offset(10, -10),
+                      blurRadius: 15,
+                      spreadRadius: 6.0,
+                    )
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Divider(
+                      height: 10.0,
+                    ),
+                    const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                        color: main_theme,
                       ),
-                      child: Column(children: [
-                        Container(
-                            margin: const EdgeInsets.only(top: 85),
-                            child: const Text(
-                              'Krita',
-                              style: TextStyle(
-                                  fontFamily: 'SAMAN',
-                                  color: color,
-                                  fontSize: 105),
-                            )),
-                        //sign up container
-                        Container(
-                            margin: const EdgeInsets.only(top: 70),
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 15,
-                                  color: Color.fromARGB(34, 0, 0, 0),
-                                  offset: Offset(10, -10),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              height: 70,
+                              child: InputCard(
+                                child: TextFormField(
+                                  controller: nameController,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Enter name',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Color.fromARGB(127, 117, 117, 117),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your name';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                              ],
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(40),
-                                bottom: Radius.circular(0),
                               ),
                             ),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(40),
-                                  bottom: Radius.circular(0),
-                                ),
-                                color: Color.fromARGB(246, 255, 255, 255),
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                        top: 50,
-                                      ),
-                                      child: const Text('Sign Up',
-                                          style: TextStyle(
-                                            fontSize: 28,
-                                            fontWeight: FontWeight.w500,
-                                            color: color,
-                                          )),
+                            Container(
+                              height: 70,
+                              child: InputCard(
+                                child: TextFormField(
+                                  controller: emailController,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Enter email id',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Color.fromARGB(127, 117, 117, 117),
+                                      fontSize: 14,
                                     ),
-                                    Container(
-                                      height: 45,
-                                      width: 350,
-                                      margin: const EdgeInsets.only(
-                                        top: 50,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                        color:
-                                            Color.fromARGB(127, 227, 227, 227),
-                                      ),
-                                      child: Container(
-                                        margin: const EdgeInsets.all(14),
-                                        child: const TextField(
-                                          decoration: InputDecoration(
-                                              labelText: 'User Name',
-                                              border: InputBorder.none,
-                                              labelStyle: TextStyle(
-                                                color: Color.fromARGB(
-                                                    127, 117, 117, 117),
-                                                fontSize: 14,
-                                              )),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 45,
-                                      width: 350,
-                                      margin: const EdgeInsets.only(
-                                        top: 15,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                        color:
-                                            Color.fromARGB(127, 227, 227, 227),
-                                      ),
-                                      child: Container(
-                                        margin: const EdgeInsets.all(14),
-                                        child: const TextField(
-                                          decoration: InputDecoration(
-                                              labelText: 'Email ID',
-                                              border: InputBorder.none,
-                                              labelStyle: TextStyle(
-                                                color: Color.fromARGB(
-                                                    127, 117, 117, 117),
-                                                fontSize: 14,
-                                              )),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 45,
-                                      width: 350,
-                                      margin: const EdgeInsets.only(
-                                        top: 15,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                        color:
-                                            Color.fromARGB(127, 227, 227, 227),
-                                      ),
-                                      child: Container(
-                                        margin: const EdgeInsets.all(14),
-                                        child: const TextField(
-                                          decoration: InputDecoration(
-                                              labelText: 'Password',
-                                              border: InputBorder.none,
-                                              labelStyle: TextStyle(
-                                                color: Color.fromARGB(
-                                                    127, 117, 117, 117),
-                                                fontSize: 14,
-                                              )),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                        height: 45,
-                                        width: 350,
-                                        margin: const EdgeInsets.only(
-                                          top: 15,
-                                        ),
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
-                                          color: Color.fromARGB(
-                                              127, 227, 227, 227),
-                                        ),
-                                        child: Container(
-                                          margin: const EdgeInsets.all(14),
-                                          child: const TextField(
-                                            decoration: InputDecoration(
-                                                labelText: 'Confirm Password',
-                                                border: InputBorder.none,
-                                                labelStyle: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      127, 117, 117, 117),
-                                                  fontSize: 14,
-                                                )),
-                                          ),
-                                        )),
-                                    Container(
-                                        height: 59,
-                                        width: 350,
-                                        margin: const EdgeInsets.only(
-                                          top: 35,
-                                        ),
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                          color: color,
-                                        ),
-                                        child: Container(
-                                          width: 300,
-                                          margin: const EdgeInsets.all(18),
-                                          child: FloatingActionButton(
-                                            backgroundColor: Colors.transparent,
-                                            elevation: 0,
-                                            onPressed: () {
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (context) =>
-                                              //             const WelcomePage()));
-                                            },
-                                            child: const Text(
-                                              'Sign Up',
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                        )),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            child: const Text(
-                                              'Already have an account?',
-                                            ),
-                                          ),
-                                          Container(
-                                            child: TextButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const SignInPage(),
-                                                    ));
-                                              },
-                                              child: const Text(
-                                                'Sign in',
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your email';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
-                            ))
-                      ]))),
-            )));
+                            ),
+                            Container(
+                              height: 70,
+                              child: InputCard(
+                                child: TextFormField(
+                                  controller: passwordController,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Enter password',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Color.fromARGB(127, 117, 117, 117),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your password';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 70,
+                              child: InputCard(
+                                child: TextFormField(
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Confirm Password',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      color: Color.fromARGB(127, 117, 117, 117),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter correct password';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: FloatingActionButton.extended(
+                        onPressed: () async {
+                          String? success = await auth.signUpWithEmail(
+                              nameController.text,
+                              emailController.text,
+                              passwordController.text);
+                          if (_formKey.currentState!.validate()) {
+                            //   SIgnUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                            // }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const UserFeed(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Text('Please enter all the details')));
+                          }
+                        },
+                        label: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor: main_theme,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already have an account?',
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignInPage(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Sign In here',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

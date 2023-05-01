@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:krita/donate/form.dart';
+import 'package:krita/donate/userFeed.dart';
 import 'SignUp.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:krita/provider/sign_in_provider.dart';
@@ -60,7 +61,7 @@ class _State extends State<SignInPage> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => form(),
+          builder: (context) => UserFeed(),
         ),
       );
     }

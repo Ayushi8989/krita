@@ -14,6 +14,7 @@ import 'package:geocoding/geocoding.dart';
 final Reference storageref = FirebaseStorage.instance.ref();
 User? user;
 String? mediaUrl;
+Position? position;
 
 class CreatePost extends StatefulWidget {
   const CreatePost({super.key});
@@ -33,6 +34,7 @@ class PostState extends State<CreatePost> {
   TextEditingController dateController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   TextEditingController vegnController = TextEditingController();
+  TextEditingController msgController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
   fromCamera() async {
@@ -104,14 +106,16 @@ class PostState extends State<CreatePost> {
   }
 
   Future<void> userSetup(
-      User? user,
-      String location,
-      String foodItem,
-      String time,
-      String date,
-      String quantity,
-      String? mediaurl,
-      String vegn) async {
+    User? user,
+    String location,
+    String foodItem,
+    String time,
+    String date,
+    String quantity,
+    String? mediaurl,
+    String vegn,
+    String msg,
+  ) async {
     User? user = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance
         .collection('Users')
@@ -129,6 +133,7 @@ class PostState extends State<CreatePost> {
       "quantity": quantity,
       "mediaurl": mediaurl,
       "veg/nonveg": vegn,
+      "msg": msg,
     });
     setState(() {
       status = true;
@@ -144,11 +149,10 @@ class PostState extends State<CreatePost> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
-
-    Position position = await Geolocator.getCurrentPosition(
+    position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
+        await placemarkFromCoordinates(position!.latitude, position!.longitude);
     Placemark placemark = placemarks[0];
     setState(() {
       locationController.text =
@@ -237,7 +241,7 @@ class PostState extends State<CreatePost> {
                   Container(
                     padding: const EdgeInsets.only(left: 15),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.datetime,
                       maxLength: 5,
                       onChanged: (value) {
                         if (timeController.text.length == 2) {
@@ -308,6 +312,22 @@ class PostState extends State<CreatePost> {
                       ),
                     ),
                   ),
+                  Divider(),
+                  Container(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      controller: msgController,
+                      decoration: const InputDecoration(
+                        hintText: "Add a message",
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
                   const Divider(),
                   const SizedBox(
                     height: 30,
@@ -369,8 +389,9 @@ class PostState extends State<CreatePost> {
                           String date = dateController.text;
                           String quantity = quantityController.text;
                           String vegn = vegnController.text;
+                          String msg = msgController.text;
                           userSetup(user, location, foodItem, time, date,
-                              quantity, mediaUrl, vegn);
+                              quantity, mediaUrl, vegn, msg);
                           locationController.clear();
                           foodItemController.clear();
                           timeController.clear();
