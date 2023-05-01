@@ -7,7 +7,7 @@ import 'package:krita/ngo/reusableWidgets/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signup.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
-import 'package:krita/provider/authentication.dart';
+import 'package:krita/backend/ngo/authentication.dart';
 
 class Ngo_SignInPage extends StatefulWidget {
   const Ngo_SignInPage({super.key});
@@ -172,7 +172,7 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                           TextButton(
                               onPressed: () async {
                                 User? user = await auth.signInWithGoogle();
-                                // print(user!.email);
+                                print(user);
                                 if (user != null) {
                                   bool isUserRegistered =
                                       await auth.isUserRegistered(user.uid);

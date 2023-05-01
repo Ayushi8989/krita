@@ -8,7 +8,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:krita/ngo/ngo_createPost.dart';
 import 'package:krita/ngo/ngo_userProfile.dart';
 import 'package:krita/ngo/reusableWidgets/donationPostDetails.dart';
-import 'package:krita/provider/authentication.dart';
+import 'package:krita/backend/ngo/authentication.dart';
 
 import '../homePage.dart';
 

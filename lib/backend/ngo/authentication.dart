@@ -27,7 +27,7 @@ class Authentication {
     );
 
 
-    // UserCredential credentials =
+    UserCredential credentials =
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     final user = FirebaseAuth.instance.currentUser!;
@@ -41,7 +41,7 @@ class Authentication {
       'email': userEmail,
       'idToken': userIdToken,
     });
-    // return credentials.user;
+     return credentials.user;
   }
 
   Future<bool> isUserRegistered(String uid) async {

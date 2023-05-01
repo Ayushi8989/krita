@@ -10,11 +10,9 @@ import 'homePage.dart';
 import 'donate/SignIn.dart';
 import 'ngo/ngo_signin.dart';
 import 'constants.dart';
-import 'package:web_socket_channel/io.dart';
-
-//const color = Color.fromARGB(255, 251, 167, 0);
 
 void main() async {
+  //Initialise Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());

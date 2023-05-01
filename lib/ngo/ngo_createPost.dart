@@ -1,5 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:krita/backend/ngo/geolocator.dart';
 import 'package:krita/constants.dart';
 import 'package:krita/ngo/reusableWidgets/capsuleCard.dart';
 
@@ -17,6 +21,24 @@ class _ngo_createPostState extends State<ngo_createPost> {
   double _currentSliderValue = 20;
   List<int> type = [1, 1, 1, 1, 1];
   double currentSliderValue = 20;
+
+
+  Future<void> GetAddressFromLatLong(Position position) async{
+    List<Location> locations = await locationFromAddress("Gronausestraat 710, Enschede");
+    print(locations);
+
+    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+    print(placemark);
+
+    Placemark place = placemark[0];
+    Address = '${place.thoroughfare}/${place.street} ${place.subLocality}, ${place.locality}, ${place.subLocality}, ${place.administrativeArea} ${place.postalCode}';
+    setState(() {
+      //Address = locations.last.latitude.toString() + "  " + locations.last.longitude.toString();
+    });
+  }
+
+  String location = 'Null, Press Button';
+  String Address = ' ';
 
 
   @override
@@ -227,17 +249,48 @@ class _ngo_createPostState extends State<ngo_createPost> {
                         ),
                       ),
 
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'ADD LOCATION',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(225, 42, 131, 236),
-                          ),
+                      TextButton.icon(
+                        onPressed: () async{
+                          Position position = await determinePosition();
+                          print(position.latitude);
+
+                          location = 'Lat: ${position.latitude}, Log: ${position.longitude}';
+                          GetAddressFromLatLong(position);
+                        },
+                        icon: Icon(
+                          Bootstrap.geo_alt_fill,
+                          color: Color.fromARGB(225, 42, 131, 236),
+                          size: 20,
                         ),
+                        label: Text(
+                            'ADD LOCATION',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(225, 42, 131, 236),
+                            ),
+                          ),
                       )
                     ],
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
+                    decoration: BoxDecoration(
+                        color: Address != ' ' ? Color.fromARGB(
+                            255, 236, 236, 236) : Colors.transparent,
+                        border: Border.all(
+                          width: 1.0,
+                          color: Address != ' ' ? Colors.grey : Colors.transparent,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Text(
+                      '${Address}',
+                      style: TextStyle(
+                        color: Address != ' ' ? Colors.black54 : Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ],
               ),
