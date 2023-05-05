@@ -99,8 +99,8 @@ class _MainPageState extends State<MainPage> {
               color: Color.fromARGB(73, 158, 158, 158),
               borderRadius: BorderRadius.all(Radius.circular(30))),
           child: Row(
-            children: [
-              const Icon(
+            children: const [
+              Icon(
                 Icons.search,
                 color: Colors.black,
               ),
@@ -178,7 +178,7 @@ class _MainPageState extends State<MainPage> {
                       ],
                     ),
                     const SizedBox(width: 38.0),
-                    IconButton(onPressed: null, icon: Icon(Icons.more_horiz))
+                    IconButton(onPressed: () {}, icon: Icon(Icons.more_horiz))
                   ],
                 ),
                 const Padding(padding: EdgeInsets.only(top: 15)),

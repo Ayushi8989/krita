@@ -8,6 +8,8 @@ import 'package:krita/provider/sign_in_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:krita/donate/profile.dart';
 
+import 'chat.dart';
+
 class UserFeed extends StatefulWidget {
   const UserFeed({Key? key}) : super(key: key);
 
@@ -15,13 +17,15 @@ class UserFeed extends StatefulWidget {
   State<UserFeed> createState() => UserFeedState();
 }
 
+User? user = FirebaseAuth.instance.currentUser;
+
 class UserFeedState extends State<UserFeed> {
   int selectedpage = 0;
 
   final _pageOptions = [
     MainPage(),
     CreatePost(),
-    SignInPage(),
+    ChatScreen(),
   ];
 
   @override
