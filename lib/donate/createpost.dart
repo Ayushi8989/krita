@@ -11,11 +11,6 @@ import 'package:krita/provider/sign_in_provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:geocoding/geocoding.dart';
 
-final Reference storageref = FirebaseStorage.instance.ref();
-User? user;
-String? mediaUrl;
-Position? position;
-
 class CreatePost extends StatefulWidget {
   const CreatePost({super.key});
   @override
@@ -36,6 +31,11 @@ class PostState extends State<CreatePost> {
   TextEditingController vegnController = TextEditingController();
   TextEditingController msgController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
+
+  final Reference storageref = FirebaseStorage.instance.ref();
+  User? user;
+  String? mediaUrl;
+  Position? position;
 
   fromCamera() async {
     Navigator.pop(context);

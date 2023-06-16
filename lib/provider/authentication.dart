@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:krita/ngo/mainPage.dart';
 import 'package:krita/ngo/userRole.dart';
 
-class Authentication {
+class Auth with ChangeNotifier{
   //create a new firebase auth instance on firebaseAuth
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String? uid;
+
+  String? get uidReturn => uid;
 
   //For Google Sign-In
   Future<User?> signInWithGoogle() async {
@@ -27,7 +32,7 @@ class Authentication {
     );
 
 
-    // UserCredential credentials =
+    UserCredential credentials =
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     final user = FirebaseAuth.instance.currentUser!;
@@ -41,10 +46,13 @@ class Authentication {
       'email': userEmail,
       'idToken': userIdToken,
     });
-    // return credentials.user;
+    uid = credentials.user!.uid;
+    print(uid);
+    notifyListeners();
+    return credentials.user;
   }
 
-  Future<bool> isUserRegistered(String uid) async {
+  Future<bool> isUserRegistered(String? uidProvider) async {
     return await FirebaseFirestore.instance
         .collection('Users')
         .doc(uid)
@@ -70,7 +78,8 @@ class Authentication {
       });
 
       // Return true to indicate that the sign-up was successful
-      return uid;
+      // return uid;
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         return 'The account already exists for that email';
@@ -95,6 +104,7 @@ class Authentication {
 
   //To sign out
   Future<void> logout() async => await FirebaseAuth.instance.signOut();
+
 }
 
 // class AuthenticationByEmail {
