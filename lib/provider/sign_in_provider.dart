@@ -55,4 +55,6 @@ class Authentication extends ChangeNotifier {
 
     return user;
   }
+
+  // signUpWithEmail(String text, String text2, String text3) {}
 }

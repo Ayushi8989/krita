@@ -25,7 +25,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Authentication auth = Authentication();
+  Auth auth = Auth();
 
   @override
 

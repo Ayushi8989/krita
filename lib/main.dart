@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:krita/donate/SignUp.dart';
 import 'package:krita/ngo/ngo_signup.dart';
+import 'package:krita/provider/authentication.dart';
 import 'package:krita/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,8 +23,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => Authentication(),
+  Widget build(BuildContext context) => MultiProvider(
+        // create: (context) => Authentication(),
+        providers: [
+          ChangeNotifierProvider<Authentication>(create: (_) => Authentication()),
+          ChangeNotifierProvider<Auth>(create: (_) => Auth()),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

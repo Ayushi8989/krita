@@ -8,6 +8,7 @@ import 'package:krita/ngo/ngo_signup.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
 import 'package:krita/provider/authentication.dart';
+import 'package:provider/provider.dart';
 
 class Ngo_SignInPage extends StatefulWidget {
   const Ngo_SignInPage({super.key});
@@ -22,10 +23,12 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Authentication auth = Authentication();
+  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
+    String? uidProvider = context.watch<Auth>().uid;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: bg_color,
@@ -169,35 +172,41 @@ class _Ngo_SignInPageState extends State<Ngo_SignInPage> {
                           TextButton(
                               onPressed: () {},
                               child: Logo(Logos.facebook_logo)),
-                          TextButton(
-                              onPressed: () async {
-                                User? user = await auth.signInWithGoogle();
-                                print(user);
-                                if (user != null) {
-                                  bool isUserRegistered =
-                                      await auth.isUserRegistered(user.uid);
-                                  if (isUserRegistered) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MainPage(),
-                                      ),
-                                    );
-                                  } else {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const userRole(),
-                                      ),
-                                    );
-                                  }
-                                  final snackBar = const SnackBar(
-                                      content: Text("You're Logged In"));
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              },
-                              child: Logo(Logos.google)),
+                          Consumer<Auth>(
+                            builder: (context, auth, child) {
+                              return TextButton(
+                                  onPressed: () async {
+                                    User? user = await auth.signInWithGoogle();
+                                    print(auth.uidReturn);
+                                    print(user);
+                                    if (user != null) {
+                                      bool isUserRegistered = await auth
+                                          .isUserRegistered(uidProvider);
+                                      if (isUserRegistered) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => MainPage(),
+                                          ),
+                                        );
+                                      } else {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const userRole(),
+                                          ),
+                                        );
+                                      }
+                                      final snackBar = const SnackBar(
+                                          content: Text("You're Logged In"));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
+                                  },
+                                  child: Logo(Logos.google));
+                            },
+                          ),
                           TextButton(
                               onPressed: () {}, child: Icon(FontAwesome.phone)),
                         ],
