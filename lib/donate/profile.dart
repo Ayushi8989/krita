@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:krita/constants.dart';
 
 import '../provider/authentication.dart';
+
+User? userr;
+List<Map<String, dynamic>> _users = [];
+int count = 0;
 
 class profile extends StatefulWidget {
   const profile({Key? key, required User user})
@@ -20,7 +25,30 @@ class profileState extends State<profile> {
 
   profileState(this._user);
 
+  Future<void> credits() async {
+    userr = FirebaseAuth.instance.currentUser;
+    final Users =
+        FirebaseFirestore.instance.collection('Users').doc(userr!.uid);
+    final userpost = Users.collection('userpost');
+
+    final QuerySnapshot snapshot = await userpost.get();
+    final List<QueryDocumentSnapshot> documents = snapshot.docs;
+    final List<Map<String, dynamic>> userslist =
+        documents.map((doc) => doc.data() as Map<String, dynamic>).toList();
+    setState(() {
+      _users = userslist;
+    });
+    setState(() {
+      count = _users.length;
+    });
+  }
+
   @override
+  void initState() {
+    super.initState();
+    credits();
+  }
+
   Widget build(BuildContext context) {
     bool isSigningOut = false;
 
@@ -110,13 +138,13 @@ class profileState extends State<profile> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
-                      children: const [
+                      children: [
                         Text(
-                          "20",
-                          style: TextStyle(
+                          count.toString(),
+                          style: const TextStyle(
                               fontSize: 40, fontWeight: FontWeight.w600),
                         ),
-                        Text(
+                        const Text(
                           "Donations",
                           style: TextStyle(
                               fontSize: 20,
@@ -142,13 +170,13 @@ class profileState extends State<profile> {
                       ],
                     ),
                     Column(
-                      children: const [
+                      children: [
                         Text(
-                          "16",
-                          style: TextStyle(
+                          count.toString(),
+                          style: const TextStyle(
                               fontSize: 40, fontWeight: FontWeight.w600),
                         ),
-                        Text(
+                        const Text(
                           "Credits",
                           style: TextStyle(
                               fontSize: 20,
