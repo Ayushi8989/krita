@@ -12,7 +12,7 @@ import 'package:krita/constants.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
-
+  
   @override
   _State createState() => _State();
 }

@@ -5,7 +5,7 @@ import 'package:icons_plus/icons_plus.dart';
 class donationPostDetails extends StatefulWidget {
   final String? doner_profile_picture;
   final String doner_name;
-  final String post_time;
+  final DateTime post_time;
   final String title;
 
   const donationPostDetails(
@@ -44,7 +44,7 @@ class _donationPostDetailsState extends State<donationPostDetails> {
                       Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: 6.0, horizontal: 12.0),
-                        child: ProfilePicture(
+                        child: widget.doner_profile_picture==null ? Container() : ProfilePicture(
                           name: ' ',
                           radius: 20,
                           fontsize: 21,
@@ -92,7 +92,7 @@ class _donationPostDetailsState extends State<donationPostDetails> {
                           color: Color.fromARGB(255, 154, 154, 154),
                         ),
                         Text(
-                          widget.post_time,
+                          widget.post_time.day.toString(),
                           style: TextStyle(
                             color: Color.fromARGB(255, 154, 154, 154),
                           ),

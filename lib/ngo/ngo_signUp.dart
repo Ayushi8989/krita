@@ -6,8 +6,7 @@ import 'package:krita/ngo/reusableWidgets/formInput_Card.dart';
 import 'package:krita/ngo/ngo_signIn.dart';
 import 'package:krita/ngo/userRole.dart';
 import 'package:krita/constants.dart';
-
-import '../provider/authentication.dart';
+import 'package:krita/provider/authentication.dart';
 
 class Ngo_SignUpPage extends StatefulWidget {
   const Ngo_SignUpPage({super.key});
@@ -26,7 +25,7 @@ class _Ngo_SignUpPageState extends State<Ngo_SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Authentication auth = Authentication();
+  Auth auth = Auth();
 
   @override
 

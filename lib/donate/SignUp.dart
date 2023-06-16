@@ -3,6 +3,7 @@ import 'package:krita/donate/userFeed.dart';
 import '../constants.dart';
 import '../ngo/reusableWidgets/formInput_Card.dart';
 import '../provider/authentication.dart';
+import '../provider/sign_in_provider.dart';
 import 'SignIn.dart';
 
 const color = Color.fromARGB(230, 247, 149, 30);
@@ -14,7 +15,7 @@ class SignUpPage extends StatefulWidget {
   _State createState() => _State();
 }
 
-Authentication auth = Authentication();
+Auth auth = Auth();
 final myController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 TextEditingController nameController = TextEditingController();
